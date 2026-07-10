@@ -1,42 +1,40 @@
 # mayarid-redesign
 
-**Speculative Design Engineer (AI) case study** for Mayar’s **AI Landing Page Builder**.
+Speculative **Design Engineer (AI)** specimen for Mayar — **Floating Island** hero.
 
-> Unaffiliated portfolio work. Not an official Mayar product or redesign.
+> Unaffiliated portfolio work. Not an official Mayar product.
 
-## Scope (current)
+## Current slice
 
-**Hero screen only** — product pitch + builder UI preview.
+**Static Floating Island specimen hero** — recreated from Magic Layers / original AI composite as:
 
-Next slices (later): generate → edit → preview flow, case study writeup, deploy to personal site.
+| Layer | Implementation |
+|-------|----------------|
+| UI chrome, labels, lines, card, CTA | **Code** (HTML/CSS/SVG) |
+| Floating island | **Image** `/public/specimen/island.jpg` |
+| Headphones product | **Image** `/public/specimen/headphones.png` |
 
-## Stack
+See `docs/ANIMATIONS.md` for what to animate later.
 
-| Layer | Choice |
-|-------|--------|
-| Framework | Next.js (App Router) + TypeScript + Tailwind |
-| Build / design engineering | **Grok Build** |
-| Visual reference | **Reve AI** (direction; assets expand over time) |
-
-Honest JD mapping: Mayar listed Claude Design / Claude Code / Codex. This case study shows the **same competency class** (AI-native design engineering, taste, product UI) with the tools actually used — Grok Build + Reve AI.
-
-## Run locally
+## Run
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+→ [http://localhost:3000](http://localhost:3000)
 
-## Live
+## Stack
 
-TBD — will ship on personal site; Vercel backup if needed.
+- Next.js App Router + TypeScript + Tailwind  
+- Built with **Grok Build**  
+- Spec source: Magic Layers SVG + Specimen Hero PNG  
 
-## Author
+## Why not ship the Magic Layers SVG as-is?
 
-Portfolio proof for reconsideration / portfolio review for **Design Engineer (AI)** at Mayar (and similar roles).
+It was ~4MB of **46 PNG slices** (text, pills, corners baked as images). Rebuilding as code gives sharp type, real interactions, and clean animation hooks.
 
 ## License
 
-MIT — see source; Mayar trademarks remain theirs.
+MIT for code. Mayar trademarks remain theirs. Photoreal assets for portfolio specimen only.

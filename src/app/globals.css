@@ -1,30 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f6f2eb;
-  --foreground: #0c0f14;
-  --muted: #5c635c;
-  --surface: #fffdf9;
-  --surface-2: #efe9df;
-  --ink: #0c0f14;
-  --accent: #0f766e;
-  --accent-soft: #ccfbf1;
-  --line: rgba(12, 15, 20, 0.08);
-  --ease-out-expo: cubic-bezier(0.32, 0.72, 0, 1);
+  --bg: #f7f5f0;
+  --ink: #0f172a;
+  --ink-soft: #1e293b;
+  --blue: #2563eb;
+  --blue-deep: #1d4ed8;
+  --muted: #64748b;
+  --muted-faint: #94a3b8;
+  --line: rgba(15, 23, 42, 0.12);
+  --card: rgba(255, 255, 255, 0.72);
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
+  --color-bg: var(--bg);
   --color-ink: var(--ink);
-  --color-accent: var(--accent);
-  --color-accent-soft: var(--accent-soft);
+  --color-ink-soft: var(--ink-soft);
+  --color-blue: var(--blue);
+  --color-blue-deep: var(--blue-deep);
+  --color-muted: var(--muted);
+  --color-muted-faint: var(--muted-faint);
   --color-line: var(--line);
+  --color-card: var(--card);
   --font-sans: var(--font-geist-sans);
-  --font-display: var(--font-display);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -33,64 +32,26 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg);
+  color: var(--ink);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
-/* Fixed film grain — pointer-events none */
-.grain {
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 40;
-  opacity: 0.035;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+/* Spec mono labels */
+.specimen-label {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10px;
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(1.25rem);
-    filter: blur(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
-.animate-fade-up {
-  animation: fade-up 0.9s var(--ease-out-expo) both;
-}
-
-.delay-1 {
-  animation-delay: 80ms;
-}
-.delay-2 {
-  animation-delay: 160ms;
-}
-.delay-3 {
-  animation-delay: 240ms;
-}
-.delay-4 {
-  animation-delay: 320ms;
-}
-.delay-5 {
-  animation-delay: 400ms;
-}
-
-@keyframes pulse-soft {
-  0%,
-  100% {
-    opacity: 0.55;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-.pulse-soft {
-  animation: pulse-soft 2.4s ease-in-out infinite;
+/* Soft ambient (no blur on scroll content) */
+.specimen-glow {
+  background: radial-gradient(
+    ellipse 50% 40% at 72% 48%,
+    rgba(37, 99, 235, 0.06),
+    transparent 70%
+  );
 }

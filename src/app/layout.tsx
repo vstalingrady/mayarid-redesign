@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Newsreader } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,20 +12,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const newsreader = Newsreader({
-  variable: "--font-display",
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-});
-
 export const metadata: Metadata = {
-  title: "Mayar AI Landing Page Builder — Speculative Case Study",
+  title: "Mayar Specimen — Floating Island Hero",
   description:
-    "Speculative Design Engineer (AI) case study for Mayar's AI Landing Page Builder. Built with Grok Build; visual direction referenced from Reve AI. Unaffiliated portfolio work.",
+    "Speculative Design Engineer (AI) specimen: Frictionless Online Checkout hero. Rebuilt as real UI + geometry from Magic Layers. Grok Build.",
   openGraph: {
-    title: "Mayar AI Landing Page Builder — Speculative Case Study",
+    title: "Mayar Specimen — Floating Island Hero",
     description:
-      "Design Engineer (AI) speculative sprint: generate → edit → publish-ready landing pages for creators & UMKM.",
+      "Static recreation of Floating Island specimen hero — code shapes + photoreal island.",
     type: "website",
   },
 };
@@ -38,11 +32,9 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
-        {children}
-      </body>
+      <body className="min-h-full flex flex-col bg-bg text-ink">{children}</body>
     </html>
   );
 }
