@@ -85,56 +85,56 @@
 
 /* Header — drops in from above */
 .motion-ready .m-header.in-view {
-  animation: mayar-drop-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: mayar-drop-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* Staggered copy blocks */
 .motion-ready .m-copy-1.in-view {
-  animation: mayar-fade-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  animation: mayar-fade-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
 }
 .motion-ready .m-copy-2.in-view {
-  animation: mayar-fade-up 1.45s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+  animation: mayar-fade-up 1.28s cubic-bezier(0.16, 1, 0.3, 1) 0.38s both;
 }
 .motion-ready .m-copy-3.in-view {
-  animation: mayar-fade-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
+  animation: mayar-fade-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
 }
 .motion-ready .m-copy-4.in-view {
-  animation: mayar-fade-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.95s both;
+  animation: mayar-fade-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.83s both;
 }
 .motion-ready .m-copy-5.in-view {
-  animation: mayar-fade-up 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.2s both;
+  animation: mayar-fade-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.05s both;
 }
 
 /* Stage (carousel) */
 .motion-ready .m-stage.in-view {
-  animation: mayar-scale-in 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+  animation: mayar-scale-in 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.23s both;
 }
 
 /* Product dashboard card */
 .motion-ready .m-product.in-view {
-  animation: mayar-card-rise 1.6s cubic-bezier(0.16, 1, 0.3, 1) 1.4s both;
+  animation: mayar-card-rise 1.43s cubic-bezier(0.16, 1, 0.3, 1) 1.43s both;
 }
 
 /* Notes */
 .motion-ready .m-note.in-view {
-  animation: mayar-fade-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: mayar-fade-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .motion-ready .m-note-1.in-view {
-  animation-delay: 1.4s;
+  animation-delay: 1.28s;
 }
 .motion-ready .m-note-2.in-view {
-  animation-delay: 1.65s;
+  animation-delay: 1.5s;
 }
 .motion-ready .m-note-3.in-view {
-  animation-delay: 1.9s;
+  animation-delay: 1.73s;
 }
 .motion-ready .m-note-4.in-view {
-  animation-delay: 2.15s;
+  animation-delay: 1.95s;
 }
 
 /* Trust badge */
 .motion-ready .m-trust.in-view {
-  animation: mayar-fade-up 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: mayar-fade-up 1.28s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* SVG lines */
@@ -143,19 +143,19 @@
   stroke-dashoffset: 80;
 }
 .motion-ready .m-line.in-view {
-  animation: mayar-draw 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: mayar-draw 1.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 .motion-ready .m-line-1.in-view {
-  animation-delay: 1.2s;
+  animation-delay: 1.05s;
 }
 .motion-ready .m-line-2.in-view {
-  animation-delay: 1.45s;
+  animation-delay: 1.28s;
 }
 .motion-ready .m-line-3.in-view {
-  animation-delay: 1.7s;
+  animation-delay: 1.5s;
 }
 .motion-ready .m-line-4.in-view {
-  animation-delay: 1.95s;
+  animation-delay: 1.73s;
 }
 
 /* SVG nodes */
@@ -165,19 +165,19 @@
   transform-origin: center;
 }
 .motion-ready .m-dot.in-view {
-  animation: mayar-node 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: mayar-node 0.68s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 .motion-ready .m-dot-1.in-view {
-  animation-delay: 2.0s;
+  animation-delay: 1.8s;
 }
 .motion-ready .m-dot-2.in-view {
-  animation-delay: 2.25s;
+  animation-delay: 2.03s;
 }
 .motion-ready .m-dot-3.in-view {
-  animation-delay: 2.5s;
+  animation-delay: 2.25s;
 }
 .motion-ready .m-dot-4.in-view {
-  animation-delay: 2.75s;
+  animation-delay: 2.48s;
 }
 
 /* Continuous island float via CSS as backup; JS also drives this */

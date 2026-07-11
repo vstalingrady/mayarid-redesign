@@ -83,7 +83,7 @@ export function TrustStrip() {
           style={{
             opacity: inView ? 1 : 0,
             transform: inView ? "none" : "translateY(8px)",
-            transition: "opacity 1.0s var(--ease), transform 1.1s var(--ease)",
+            transition: "opacity 0.75s var(--ease), transform 0.83s var(--ease)",
           }}
         >
           Dipercaya lembaga dan institusi terkemuka di seluruh Indonesia
@@ -97,7 +97,7 @@ export function TrustStrip() {
               style={{
                 opacity: inView ? 1 : 0,
                 transform: inView ? "none" : "translateY(10px)",
-                transition: `opacity 1.0s var(--ease) ${inView ? 160 + i * 120 : 0}ms, transform 1.1s var(--ease) ${inView ? 160 + i * 120 : 0}ms`,
+                transition: `opacity 0.75s var(--ease) ${inView ? 120 + i * 90 : 0}ms, transform 0.83s var(--ease) ${inView ? 120 + i * 90 : 0}ms`,
               }}
             >
               <Image

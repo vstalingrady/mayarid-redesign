@@ -143,7 +143,7 @@ function FadeIn({
       style={{
         opacity: active ? 1 : 0,
         transform: active ? "none" : hidden,
-        transition: `opacity 1.2s cubic-bezier(0.16,1,0.3,1) ${active ? delay : 0}ms, transform 1.4s cubic-bezier(0.16,1,0.3,1) ${active ? delay : 0}ms`,
+        transition: `opacity 0.83s cubic-bezier(0.16,1,0.3,1) ${active ? delay : 0}ms, transform 0.98s cubic-bezier(0.16,1,0.3,1) ${active ? delay : 0}ms`,
       }}
     >
       {children}
@@ -177,8 +177,8 @@ function BarChart({
               backgroundColor: color,
               transform: active ? "scaleY(1)" : "scaleY(0)",
               transformOrigin: "bottom",
-              transition: `transform 1.4s cubic-bezier(0.16,1,0.3,1) ${
-                active ? delay + i * 48 : 0
+              transition: `transform 1.05s cubic-bezier(0.16,1,0.3,1) ${
+                active ? delay + i * 42 : 0
               }ms`,
             }}
           />
@@ -260,9 +260,9 @@ function DashCard({
 }
 
 function MayarBeranda({ active }: { active: boolean }) {
-  const saldo = useCountUp(169_884, active, 2400);
-  const subs = useCountUp(34, active, 1600);
-  const customers = useCountUp(342, active, 2000);
+  const saldo = useCountUp(169_884, active, 2100);
+  const subs = useCountUp(34, active, 1350);
+  const customers = useCountUp(342, active, 1650);
 
   return (
     <div className="flex min-h-[420px] bg-white text-[13px] text-[#334155] sm:min-h-[480px] lg:min-h-[520px]">
@@ -272,7 +272,7 @@ function MayarBeranda({ active }: { active: boolean }) {
           <ul className="space-y-0.5">
             {SIDEBAR_MAIN.map(({ label, Icon }, i) => (
               <li key={label}>
-                <FadeIn active={active} delay={80 + i * 80} from="left">
+                <FadeIn active={active} delay={60 + i * 60} from="left">
                   <div
                     className={`flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-[12px] ${
                       i === 0
@@ -291,7 +291,7 @@ function MayarBeranda({ active }: { active: boolean }) {
               </li>
             ))}
           </ul>
-          <FadeIn active={active} delay={560} from="left">
+          <FadeIn active={active} delay={420} from="left">
             <p className="mb-1 mt-4 px-2.5 text-[10px] font-semibold uppercase tracking-[0.08em] text-[#94a3b8]">
               Produk
             </p>
@@ -299,7 +299,7 @@ function MayarBeranda({ active }: { active: boolean }) {
           <ul className="space-y-0.5">
             {SIDEBAR_PRODUK.map(({ label, Icon }, i) => (
               <li key={label}>
-                <FadeIn active={active} delay={600 + i * 56} from="left">
+                <FadeIn active={active} delay={450 + i * 42} from="left">
                   <div className="flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-[12px] text-[#64748b]">
                     <Icon size={15} weight="regular" className="shrink-0" />
                     <span className="truncate">{label}</span>
@@ -309,7 +309,7 @@ function MayarBeranda({ active }: { active: boolean }) {
             ))}
           </ul>
         </nav>
-        <FadeIn active={active} delay={1400} from="up" className="border-t border-[#eef2f6] p-2.5">
+        <FadeIn active={active} delay={1050} from="up" className="border-t border-[#eef2f6] p-2.5">
           <p className="truncate px-1 text-[10px] text-[#94a3b8]">
             https://namabisnis.mayar.link/p
           </p>
@@ -327,7 +327,7 @@ function MayarBeranda({ active }: { active: boolean }) {
       <div className="min-w-0 flex-1 bg-[#f8fafc]">
         <FadeIn
           active={active}
-          delay={120}
+          delay={90}
           from="up"
           className="flex flex-wrap items-center justify-between gap-2 border-b border-[#eef2f6] bg-white px-3 py-2.5 sm:px-5 sm:py-3"
         >
@@ -366,7 +366,7 @@ function MayarBeranda({ active }: { active: boolean }) {
 
         <div className="space-y-3 p-3 sm:space-y-3.5 sm:p-4 lg:p-5">
           <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
-            <DashCard active={active} delay={240} className="p-4 sm:p-5">
+            <DashCard active={active} delay={180} className="p-4 sm:p-5">
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="text-[12px] text-[#64748b]">Total Saldo</p>
@@ -383,7 +383,7 @@ function MayarBeranda({ active }: { active: boolean }) {
               </div>
             </DashCard>
 
-            <DashCard active={active} delay={400} className="p-4 sm:p-5">
+            <DashCard active={active} delay={300} className="p-4 sm:p-5">
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <p className="text-[12px] text-[#64748b]">PayMe Link Anda</p>
@@ -404,13 +404,13 @@ function MayarBeranda({ active }: { active: boolean }) {
           </div>
 
           <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
-            <DashCard active={active} delay={520} className="p-4">
+            <DashCard active={active} delay={390} className="p-4">
               <p className="text-[12px] text-[#64748b]">Jumlah Berlangganan</p>
               <p className="mt-1 text-[1.5rem] font-semibold tabular-nums text-[#0f172a]">
                 {subs}
               </p>
             </DashCard>
-            <DashCard active={active} delay={640} className="p-4">
+            <DashCard active={active} delay={480} className="p-4">
               <p className="text-[12px] text-[#64748b]">Jumlah Pelanggan</p>
               <p className="mt-1 text-[1.5rem] font-semibold tabular-nums text-[#0f172a]">
                 {customers}
@@ -418,7 +418,7 @@ function MayarBeranda({ active }: { active: boolean }) {
             </DashCard>
             <DashCard
               active={active}
-              delay={760}
+              delay={570}
               className="col-span-2 p-4 lg:col-span-1"
             >
               <div className="flex items-start justify-between gap-2">
@@ -441,7 +441,7 @@ function MayarBeranda({ active }: { active: boolean }) {
           </div>
 
           <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3">
-            <FadeIn active={active} delay={880} from="scale">
+            <FadeIn active={active} delay={660} from="scale">
               <button
                 type="button"
                 className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#2563eb] py-3 text-[12px] font-bold tracking-wide text-white shadow-sm transition-transform active:scale-[0.98] sm:text-[13px]"
@@ -450,7 +450,7 @@ function MayarBeranda({ active }: { active: boolean }) {
                 BUKA QRIS STATIS
               </button>
             </FadeIn>
-            <FadeIn active={active} delay={1000} from="scale">
+            <FadeIn active={active} delay={750} from="scale">
               <button
                 type="button"
                 className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#f5c518] py-3 text-[12px] font-bold tracking-wide text-[#1e293b] shadow-sm transition-transform active:scale-[0.98] sm:text-[13px]"
@@ -461,7 +461,7 @@ function MayarBeranda({ active }: { active: boolean }) {
             </FadeIn>
           </div>
 
-          <DashCard active={active} delay={1080} className="p-4 sm:p-5">
+          <DashCard active={active} delay={810} className="p-4 sm:p-5">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
               <div className="space-y-5">
                 <ChartCard
@@ -473,7 +473,7 @@ function MayarBeranda({ active }: { active: boolean }) {
                   xLeft="Des 2021"
                   xRight="Today"
                   active={active}
-                  delay={1160}
+                  delay={870}
                 />
                 <ChartCard
                   legend="Transaksi"
@@ -483,7 +483,7 @@ function MayarBeranda({ active }: { active: boolean }) {
                   xLeft="Des 2021"
                   xRight="Today"
                   active={active}
-                  delay={1480}
+                  delay={1110}
                 />
               </div>
               <div className="space-y-5">
@@ -495,7 +495,7 @@ function MayarBeranda({ active }: { active: boolean }) {
                   xLeft="Jan 2022"
                   xRight="Today"
                   active={active}
-                  delay={1320}
+                  delay={990}
                 />
                 <ChartCard
                   legend="Rp Pembayaran"
@@ -505,7 +505,7 @@ function MayarBeranda({ active }: { active: boolean }) {
                   xLeft="Des 2021"
                   xRight="Today"
                   active={active}
-                  delay={1640}
+                  delay={1230}
                 />
               </div>
             </div>
@@ -558,7 +558,7 @@ export function ProductDashboard() {
                 ? "perspective(1400px) rotateX(2deg) rotateY(-3deg) translateY(0)"
                 : "perspective(1400px) rotateX(8deg) rotateY(-6deg) translateY(28px)",
               opacity: inView ? 1 : 0.4,
-              transition: "transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1)",
+              transition: "transform 1.05s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.05s cubic-bezier(0.16, 1, 0.3, 1)",
             }}
           >
             <div className="overflow-hidden rounded-[1.1rem] border border-line bg-white shadow-[0_40px_90px_-28px_var(--shadow-tint)] sm:rounded-[1.25rem]">
@@ -584,7 +584,7 @@ export function ProductDashboard() {
             className="pointer-events-none absolute -top-3 right-4 flex items-center gap-1.5 rounded-full border border-line bg-white px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-ink shadow-sm sm:right-6"
             style={{
               opacity: inView ? 1 : 0,
-              transition: "opacity 0.8s ease 0.4s",
+              transition: "opacity 0.6s ease 0.3s",
             }}
           >
             <span className="relative flex h-1.5 w-1.5">
