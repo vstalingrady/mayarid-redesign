@@ -1,70 +1,163 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type MouseEvent,
+} from "react";
 import { CaretLeft, CaretRight } from "@phosphor-icons/react";
 import { CASE_STUDIES } from "@/data/caseStudies";
 import { useI18n } from "@/i18n";
 
+const N = CASE_STUDIES.length;
+
 /**
- * Studi Kasus carousel — always one focal video in the center,
- * with neighbor videos peeking in from both sides.
+ * Studi Kasus carousel — one focal video always dead-center, with
+ * neighbor peeks on BOTH sides at every position (including first/last).
  *
- * Side padding = half the free space so first/last can still center.
- * scroll-snap keeps each step locked on a single card.
+ * Implementation: triple the track [set][set][set], start on the middle
+ * set, and silently re-home when the user drifts near either edge so the
+ * loop never ends and both flanks always show a preview.
  */
 export function CaseStudiesSection() {
   const { t } = useI18n();
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const settlingRef = useRef(false);
+  // Logical index into CASE_STUDIES (0..N-1)
   const [active, setActive] = useState(0);
+
+  // Triple track so we can always peek left + right
+  const track = [...CASE_STUDIES, ...CASE_STUDIES, ...CASE_STUDIES];
 
   const gapOf = (el: HTMLElement) =>
     parseFloat(getComputedStyle(el).columnGap || getComputedStyle(el).gap) ||
     16;
 
-  const syncActive = useCallback(() => {
+  const stepOf = (el: HTMLElement) => {
+    const card = el.querySelector<HTMLElement>("[data-case-card]");
+    if (!card) return 0;
+    return card.offsetWidth + gapOf(el);
+  };
+
+  /** Scroll so track-slot `slot` is dead-center. */
+  const scrollToSlot = useCallback((slot: number, behavior: ScrollBehavior) => {
     const el = scrollerRef.current;
     if (!el) return;
-    const card = el.querySelector<HTMLElement>("[data-case-card]");
-    if (!card) return;
-    const step = card.offsetWidth + gapOf(el);
+    const step = stepOf(el);
     if (step <= 0) return;
-    const index = Math.round(el.scrollLeft / step);
-    setActive(Math.max(0, Math.min(CASE_STUDIES.length - 1, index)));
+    el.scrollTo({ left: slot * step, behavior });
   }, []);
 
-  const scrollByDir = useCallback((dir: -1 | 1) => {
+  /** Map current scrollLeft → nearest track slot. */
+  const slotFromScroll = (el: HTMLElement) => {
+    const step = stepOf(el);
+    if (step <= 0) return N; // middle-set first card
+    return Math.round(el.scrollLeft / step);
+  };
+
+  const logicalFromSlot = (slot: number) =>
+    ((slot % N) + N) % N;
+
+  /**
+   * If we've drifted into the first or third copy of the track, jump to
+   * the equivalent card in the middle copy with no animation.
+   */
+  const rehomeIfNeeded = useCallback(() => {
+    const el = scrollerRef.current;
+    if (!el || settlingRef.current) return;
+    const slot = slotFromScroll(el);
+    // Middle set is slots [N, 2N). Keep a 1-card buffer on each side.
+    if (slot < N || slot >= 2 * N) {
+      const logical = logicalFromSlot(slot);
+      const target = N + logical;
+      settlingRef.current = true;
+      el.scrollTo({ left: target * stepOf(el), behavior: "auto" });
+      // Allow the browser to apply the jump before re-enabling
+      requestAnimationFrame(() => {
+        settlingRef.current = false;
+        setActive(logical);
+      });
+      return;
+    }
+    setActive(logicalFromSlot(slot));
+  }, []);
+
+  const syncFromScroll = useCallback(() => {
+    if (settlingRef.current) return;
     const el = scrollerRef.current;
     if (!el) return;
-    const card = el.querySelector<HTMLElement>("[data-case-card]");
-    if (!card) return;
-    el.scrollBy({
-      left: dir * (card.offsetWidth + gapOf(el)),
-      behavior: "smooth",
-    });
+    setActive(logicalFromSlot(slotFromScroll(el)));
   }, []);
+
+  const scrollByDir = useCallback(
+    (dir: -1 | 1) => {
+      const el = scrollerRef.current;
+      if (!el) return;
+      const step = stepOf(el);
+      if (step <= 0) return;
+      el.scrollBy({ left: dir * step, behavior: "smooth" });
+    },
+    [],
+  );
+
+  const onCardClick = useCallback(
+    (e: MouseEvent<HTMLAnchorElement>, slot: number) => {
+      const el = scrollerRef.current;
+      if (!el) return;
+      const current = slotFromScroll(el);
+      // Clicking a side peek: center it instead of navigating away
+      if (slot !== current) {
+        e.preventDefault();
+        scrollToSlot(slot, "smooth");
+      }
+    },
+    [scrollToSlot],
+  );
 
   useLayoutEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
 
-    // Opening view: first card dead-center (padding handles the rest)
-    el.scrollLeft = 0;
-    syncActive();
+    // Start on the middle set's first card — left peek = last video
+    const placeFirst = () => {
+      scrollToSlot(N, "auto");
+      setActive(0);
+    };
+    placeFirst();
+    const raf = requestAnimationFrame(placeFirst);
 
-    const onScroll = () => syncActive();
+    let scrollEndTimer: ReturnType<typeof setTimeout> | null = null;
+    const onScroll = () => {
+      syncFromScroll();
+      if (scrollEndTimer) clearTimeout(scrollEndTimer);
+      // Re-home after snap/smooth scroll settles
+      scrollEndTimer = setTimeout(() => rehomeIfNeeded(), 140);
+    };
+
+    const keepCentered = () => {
+      // Re-center whatever logical card is active after a width change
+      const logical = logicalFromSlot(slotFromScroll(el));
+      scrollToSlot(N + logical, "auto");
+      setActive(logical);
+    };
+
     el.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", syncActive);
+    window.addEventListener("resize", keepCentered);
 
-    const ro = new ResizeObserver(() => syncActive());
+    const ro = new ResizeObserver(() => keepCentered());
     ro.observe(el);
 
     return () => {
+      cancelAnimationFrame(raf);
+      if (scrollEndTimer) clearTimeout(scrollEndTimer);
       el.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", syncActive);
+      window.removeEventListener("resize", keepCentered);
       ro.disconnect();
     };
-  }, [syncActive]);
+  }, [scrollToSlot, syncFromScroll, rehomeIfNeeded]);
 
   return (
     <section
@@ -97,8 +190,7 @@ export function CaseStudiesSection() {
           <button
             type="button"
             onClick={() => scrollByDir(-1)}
-            disabled={active <= 0}
-            className="pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-[#020a36]/85 text-white shadow-lg backdrop-blur-md transition-colors hover:bg-white/10 disabled:pointer-events-none disabled:opacity-30 sm:h-11 sm:w-11"
+            className="pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-[#020a36]/85 text-white shadow-lg backdrop-blur-md transition-colors hover:bg-white/10 sm:h-11 sm:w-11"
             aria-label={t("caseStudies.prev")}
           >
             <CaretLeft weight="bold" className="h-5 w-5" />
@@ -106,8 +198,7 @@ export function CaseStudiesSection() {
           <button
             type="button"
             onClick={() => scrollByDir(1)}
-            disabled={active >= CASE_STUDIES.length - 1}
-            className="pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-[#020a36]/85 text-white shadow-lg backdrop-blur-md transition-colors hover:bg-white/10 disabled:pointer-events-none disabled:opacity-30 sm:h-11 sm:w-11"
+            className="pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-[#020a36]/85 text-white shadow-lg backdrop-blur-md transition-colors hover:bg-white/10 sm:h-11 sm:w-11"
             aria-label={t("caseStudies.next")}
           >
             <CaretRight weight="bold" className="h-5 w-5" />
@@ -115,8 +206,9 @@ export function CaseStudiesSection() {
         </div>
 
         {/*
-          Padding = (viewport - card) / 2 so one card sits dead-center and
-          neighbors peek from the sides. Keep in sync with card widths below.
+          Side padding centers one card. Width tokens must match card
+          classes below so first/last (and every) slot can sit dead-center
+          with equal peeks on both flanks.
         */}
         <div
           ref={scrollerRef}
@@ -128,22 +220,25 @@ export function CaseStudiesSection() {
             "lg:px-[max(1.5rem,calc(50%-min(44vw,34rem)/2))]",
           ].join(" ")}
         >
-          {CASE_STUDIES.map((c, i) => {
-            const isActive = i === active;
+          {track.map((c, slot) => {
+            const logical = slot % N;
+            const isActive = logical === active;
+            // Unique key across the triple track
+            const key = `${c.id}-${slot}`;
             return (
               <a
-                key={c.id}
+                key={key}
                 data-case-card
                 data-active={isActive ? "true" : "false"}
                 href={c.videoHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-current={isActive ? "true" : undefined}
+                onClick={(e) => onCardClick(e, slot)}
                 className={[
                   "group relative aspect-[16/9] shrink-0 snap-center overflow-hidden rounded-xl",
                   "bg-white/5 outline-none transition-[transform,opacity,box-shadow] duration-300",
                   "focus-visible:ring-2 focus-visible:ring-white/40",
-                  // One centered card; width leaves room for side previews
                   "w-[min(72vw,18rem)]",
                   "sm:w-[min(54vw,26rem)]",
                   "lg:w-[min(44vw,34rem)]",
@@ -158,7 +253,7 @@ export function CaseStudiesSection() {
                   fill
                   sizes="(max-width: 640px) 72vw, (max-width: 1024px) 54vw, 544px"
                   className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                  priority={i === 0}
+                  priority={slot === N}
                 />
 
                 <div
