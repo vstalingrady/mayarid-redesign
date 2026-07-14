@@ -1,0 +1,545 @@
+{
+  "nav": {
+    "products": "Products",
+    "solutions": "Solutions",
+    "pricing": "Pricing",
+    "docs": "Docs",
+    "login": "Log in",
+    "signup": "Sign up",
+    "mainAria": "Main",
+    "mobileAria": "Mobile",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "hero": {
+    "titleLine1": "Frictionless",
+    "titleLine2": "Online Checkout",
+    "titleLine3": "and Payment",
+    "for": "for",
+    "body": "Mayar makes it easy for businesses to accept payments, manage customers, and sell products & services from one platform",
+    "cta": "Start free",
+    "ctaHintBefore": "Set up in under",
+    "ctaHintTime": "2 minutes",
+    "ctaHintFree": "· free"
+  },
+  "audiences": {
+    "regionAria": "Audience",
+    "scenesAria": "Audience scenes",
+    "show": "Show {label}",
+    "forLabel": "for {label}",
+    "items": {
+      "any-business": {
+        "label": "Any Business",
+        "product": "Online Payment",
+        "status": "Just paid",
+        "alt": "Small business owners celebrating a successful payment"
+      },
+      "educators": {
+        "label": "Educators",
+        "product": "Online Class Batch 12",
+        "status": "Just paid",
+        "alt": "Online educator after students paid for class"
+      },
+      "creators": {
+        "label": "Creators",
+        "product": "Digital Course Pack",
+        "status": "Just paid",
+        "alt": "Creator checking a successful payment on their laptop"
+      },
+      "social-sellers": {
+        "label": "Social Sellers",
+        "product": "3-pc Bundle Pack",
+        "status": "Just paid",
+        "alt": "Social seller packing an order after a sale"
+      },
+      "freelancers": {
+        "label": "Freelancers",
+        "product": "Brand Design Project",
+        "status": "Just paid",
+        "alt": "Freelancer confirming a client payment at a cafe"
+      }
+    }
+  },
+  "trust": {
+    "title": "Trusted by leading institutions across Indonesia",
+    "sectionAria": "Organizations that trust Mayar",
+    "badgeBefore": "Trusted by",
+    "badgeBusinesses": "Businesses",
+    "badgeSatisfaction": "customer satisfaction",
+    "ratingAria": "Rating 5 out of 5",
+    "avatars": {
+      "maksimalindiri": { "name": "Maksimalindiri", "role": "Creator & mentor" },
+      "tres": { "name": "Tres", "role": "Content creator" },
+      "bossexcel": { "name": "Boss Excel", "role": "Educator · bossexcel.id" },
+      "anang": { "name": "Anang Marjono", "role": "Content creator" },
+      "dinar": { "name": "Dinar The HR", "role": "HR educator" }
+    }
+  },
+  "dashboard": {
+    "eyebrow": "One dashboard · every sale",
+    "titleBefore": "Run your business from",
+    "titleHighlight": "one screen",
+    "subtitle": "Balance, customers, payment links, QRIS, and activity — all on Mayar Home. Scroll here and watch it come alive.",
+    "browserUrl": "web.mayar.id · Home",
+    "liveDemo": "Live demo",
+    "footerNote": "One payment link, hundreds of digital & physical products, online classes, and subscriptions — all tied to the same balance.",
+    "sidebarMain": {
+      "home": "Home",
+      "customers": "Customers",
+      "transactions": "Transactions",
+      "subscriptions": "Subscriptions",
+      "orders": "Orders",
+      "paymentRequests": "Payment Requests"
+    },
+    "sidebarProductsHeading": "Products",
+    "sidebarProducts": {
+      "paymentLink": "Payment Link",
+      "physical": "Physical Products",
+      "digital": "Digital Products",
+      "onlineClass": "Online Class",
+      "cohort": "Cohort Class",
+      "webinar": "Webinar",
+      "events": "Events",
+      "coaching": "Coaching & Mentoring",
+      "fundraising": "Fundraising",
+      "subscriptionPack": "Subscription Pack",
+      "ebook": "E-Book",
+      "podcast": "Podcast",
+      "audiobook": "Audio Book"
+    },
+    "copyPayMe": "COPY PAY-ME LINK",
+    "company": "Mayar CompanyX",
+    "homeTitle": "Home",
+    "quickActions": "Quick Actions",
+    "productBtn": "PRODUCT",
+    "createBtn": "CREATE",
+    "totalBalance": "Total Balance",
+    "topUp": "TOP-UP",
+    "payMeLink": "Your PayMe Link",
+    "copy": "COPY",
+    "subscriptionCount": "Subscriptions",
+    "customerCount": "Customers",
+    "simplePos": "Mayar Simple POS",
+    "openQris": "OPEN STATIC QRIS",
+    "chargeQris": "CHARGE WITH QRIS",
+    "businessActivity": "Business Activity",
+    "newCustomers": "New Customers",
+    "transactions": "Transactions",
+    "visitors": "Visitors",
+    "paymentAmount": "Payment amount",
+    "lastYear": "Last Year",
+    "today": "Today",
+    "dec2021": "Dec 2021",
+    "jan2022": "Jan 2022"
+  },
+  "products": {
+    "eyebrow": "Sell anything, anywhere, to anyone",
+    "title": "Sell Any Product or Service with Ease",
+    "subtitle": "A system already tailored and automated to sell almost any product or service online — simply and quickly.",
+    "families": {
+      "payment": "Payments",
+      "physical": "Physical",
+      "digital": "Digital",
+      "live": "Live & Learning",
+      "content": "Content",
+      "saas": "SaaS & Membership",
+      "fundraise": "Fundraising"
+    },
+    "types": {
+      "link-pembayaran": "Payment Link",
+      "produk-fisik": "Physical Products",
+      "produk-digital": "Digital Products",
+      "kelas-online": "Online Class",
+      "kelas-cohort": "Cohort / Bootcamp",
+      "webinar": "Webinar",
+      "event-acara": "Events",
+      "penggalangan-dana": "Fundraising",
+      "e-book": "E-Book",
+      "podcast": "Podcast",
+      "audio-book": "Audio Book",
+      "tulisan": "Writing",
+      "web-komik": "Web Comic",
+      "membership": "Membership",
+      "saas": "SaaS",
+      "lisensi-software": "Software License",
+      "produk-credit": "Credit-Based Products",
+      "coaching": "Coaching & Mentoring"
+    },
+    "alts": {
+      "link-pembayaran": "Digital payment by card and phone",
+      "produk-fisik": "Physical product package ready to ship",
+      "produk-digital": "Laptop at a digital product workspace",
+      "lisensi-software": "Code screen and software license",
+      "kelas-online": "Online classroom and learning space",
+      "kelas-cohort": "Cohort study group around a table",
+      "webinar": "Webinar video conference on a laptop",
+      "event-acara": "Event stage and audience",
+      "coaching": "One-on-one coaching and mentoring session",
+      "e-book": "Stack of books and digital reading",
+      "podcast": "Studio podcast microphone",
+      "audio-book": "Headphones for audio books",
+      "tulisan": "Writing an article on a typewriter and paper",
+      "web-komik": "Digital illustration and comic art",
+      "membership": "Membership team in a collaboration meeting",
+      "saas": "SaaS analytics dashboard on a laptop",
+      "produk-credit": "Coins and digital credits",
+      "penggalangan-dana": "Community fundraising and donations"
+    }
+  },
+  "features": {
+    "eyebrow": "Business automation with technology",
+    "title": "All-in-One Integrated Features",
+    "subtitle": "From building web pages and landing pages, to checkout, digital payments, invoices, order management, marketing campaigns, and customer management",
+    "hubLabel": "Mayar",
+    "hubHint": "One platform · every flow",
+    "graphAria": "Mayar feature integration map",
+    "linkedTo": "linked to {count} other features",
+    "domains": {
+      "sell": "Sell",
+      "pay": "Pay",
+      "run": "Ops",
+      "grow": "Grow",
+      "platform": "Platform"
+    },
+    "nodes": {
+      "landing-page": { "label": "Landing Page", "short": "Landing" },
+      "one-click-checkout": { "label": "1-Click Checkout", "short": "Checkout" },
+      "online-payments": { "label": "Online Payments", "short": "Payments" },
+      "order-management": { "label": "Order Management", "short": "Orders" },
+      "analytics": { "label": "Analytics", "short": "Analytics" },
+      "customer-portal": { "label": "Customer Portal", "short": "Portal" },
+      "payment-link": { "label": "Payment Link", "short": "Pay Link" },
+      "billing-system": { "label": "Billing System", "short": "Billing" },
+      "discount-code": { "label": "Discount Code", "short": "Discount" },
+      "payment-reminder": { "label": "Payment Reminder", "short": "Reminder" },
+      "marketing-tools": { "label": "Marketing Tools", "short": "Marketing" },
+      "notification": { "label": "Notification", "short": "Notify" },
+      "wa-telegram": { "label": "WA & Telegram", "short": "Chat" },
+      "finance-tools": { "label": "Finance Tools", "short": "Finance" },
+      "webhooks": { "label": "Webhooks", "short": "Hooks" },
+      "api-mcp": { "label": "API & MCP", "short": "API" },
+      "google-sheet": { "label": "Google Sheets", "short": "Sheets" },
+      "iso-soc2": { "label": "ISO 27001 & SOC2", "short": "Security" }
+    }
+  },
+  "goOnline": {
+    "eyebrow": "Sell any product or service",
+    "title": "Save Time. Go Online in 2 Minutes",
+    "body1": "Selling any product or service on the internet is easier with Mayar. Web landing pages, catalog, checkout, order & customer management automatically adapt to what you sell.",
+    "body2": "Making Mayar the only platform built with a truly industry-agnostic approach.",
+    "tabsAria": "Product examples (auto-rotating)",
+    "login": "Login",
+    "paymentSuccess": "Payment successful",
+    "amountPrefix": "Amount",
+    "items": {
+      "kelas-online": {
+        "badge": "5 Lessons",
+        "title": "Course: Build a Web App with Soft Skills",
+        "price": "Rp 0",
+        "priceHint": "From 14k/month",
+        "blurb": "Video courses to build fully functional web apps with no-code tools like Soft, Mayar, and Canva.",
+        "cta": "Buy now",
+        "toastAction": "Enter class",
+        "toastAmount": "Rp 149.000",
+        "imageCaption": "Modern Life Coach",
+        "imageSub": "Business Coach · Landing Page",
+        "stats": ["2 Readings", "5 Videos", "5 Quizzes", "2 Coaching", "5 Files"]
+      },
+      "e-book": {
+        "badge": "E-Book",
+        "title": "Playbook: Frictionless Checkout for Creators",
+        "price": "Rp 77.000",
+        "priceHint": "One-time · lifetime access",
+        "blurb": "A practical guide to set up your Mayar landing page, catalog, and checkout so digital products are ready to sell in minutes.",
+        "cta": "Buy now",
+        "toastAction": "Download e-book",
+        "toastAmount": "Rp 77.000",
+        "imageCaption": "Creator Playbook",
+        "imageSub": "PDF · 48 pages",
+        "stats": ["48 Pages", "12 Templates", "PDF", "Free updates"]
+      },
+      "membership": {
+        "badge": "Membership",
+        "title": "Club: Monthly Premium Content Access",
+        "price": "Rp 49.000",
+        "priceHint": "/ month · cancel anytime",
+        "blurb": "Subscribe to content, community, and live sessions. Recurring payments run automatically — members get in, you keep creating.",
+        "cta": "Subscribe",
+        "toastAction": "Open membership",
+        "toastAmount": "Rp 49.000",
+        "imageCaption": "Premium Club",
+        "imageSub": "Community · Live · Archive",
+        "stats": ["Live weekly", "Archive", "Community", "Badge"]
+      },
+      "webinar": {
+        "badge": "Webinar",
+        "title": "Webinar: Launch a Digital Product This Week",
+        "price": "Rp 25.000",
+        "priceHint": "Includes 30-day recording",
+        "blurb": "A 90-minute live session + Q&A. Tickets, reminders, and recording access unlock automatically after payment.",
+        "cta": "Get ticket",
+        "toastAction": "Open ticket",
+        "toastAmount": "Rp 25.000",
+        "imageCaption": "Live Session",
+        "imageSub": "Zoom · 90 minutes",
+        "stats": ["Live", "Q&A", "Recording", "Certificate"]
+      }
+    }
+  },
+  "integrations": {
+    "eyebrow": "Automatically integrated",
+    "title": "Cut Integration & Development Cost",
+    "body": "Mayar is already integrated with Indonesia’s major payment methods, logistics carriers, WhatsApp, Telegram, and 5,000+ apps via Zapier and Pipedream — no custom plumbing required.",
+    "windowTitle": "Mayar Integrations",
+    "hubBlurb": "Payments · logistics · 5,000+ apps via Zapier & Pipedream",
+    "amountPrefix": "Amount",
+    "clusters": {
+      "payments": {
+        "title": "Payments",
+        "hint": "VA · e-wallet · cards · retail",
+        "toastTitle": "Payment received",
+        "toastAmount": "Rp 700.000",
+        "toastAction": "View transaction"
+      },
+      "logistics": {
+        "title": "Logistics",
+        "hint": "Carriers & auto tracking",
+        "toastTitle": "Shipping label created",
+        "toastAmount": "JNE · Regular",
+        "toastAction": "Track shipment"
+      },
+      "apps": {
+        "title": "Apps",
+        "hint": "Zapier · Pipedream · 5,000+",
+        "toastTitle": "Invoice created",
+        "toastAmount": "Rp 700.000",
+        "toastAction": "Download PDF invoice"
+      }
+    }
+  },
+  "marketing": {
+    "eyebrow": "Built-in marketing features",
+    "title": "Grow Sales with Marketing",
+    "body": "Store customer data and build relationships with marketing tools like email blasts, promo codes, bundling, upselling, cross-selling, and no-code integrations to thousands of apps.",
+    "desktop": "Desktop",
+    "save": "Save",
+    "blocks": {
+      "columns": "Columns",
+      "heading": "Heading",
+      "text": "Text",
+      "image": "Image",
+      "button": "Button",
+      "divider": "Divider",
+      "menu": "Menu",
+      "timer": "Timer",
+      "video": "Video"
+    },
+    "campaigns": {
+      "labor-day": {
+        "title": "Year-End Promo",
+        "freeShip": "FREE SHIPPING ON ORDERS OVER $50",
+        "nav": ["Boys", "Girls", "Brand"],
+        "toastTitle": "Promo email & discount code",
+        "toastSub": "New Year special ready to send",
+        "toastAction": "Blast email now",
+        "imageAlt": "Labor Day sale email creative"
+      },
+      "club": {
+        "title": "Membership Promo",
+        "freeShip": "MEMBER EXCLUSIVE · 30% OFF THIS MONTH",
+        "nav": ["Club", "Perks", "Join"],
+        "toastTitle": "Promo code MEMBER30 active",
+        "toastSub": "Ready to send to 2,480 customers",
+        "toastAction": "Send campaign",
+        "imageAlt": "Premium club membership promo"
+      },
+      "webinar": {
+        "title": "Webinar Invite",
+        "freeShip": "FREE LIVE SESSION · LIMITED SEATS",
+        "nav": ["Agenda", "Speaker", "Join"],
+        "toastTitle": "Webinar reminder sent",
+        "toastSub": "1,120 invites · real-time open rate",
+        "toastAction": "View report",
+        "imageAlt": "Live webinar invite creative"
+      }
+    }
+  },
+  "checkoutStory": {
+    "sectionAria": "1-Click Checkout story",
+    "buyer": {
+      "eyebrow": "Super-fast checkout",
+      "titleBefore": "Higher conversion with",
+      "titleHighlight": "1-Click Checkout",
+      "body": "Mayar’s 1-Click Checkout makes it easy for customers to buy your products or services. No more retyping details every purchase — Mayar fills their data in automatically."
+    },
+    "merchant": {
+      "titleBefore": "Wherever you are, lift conversion for new and returning customers",
+      "titleHighlight": "the modern way.",
+      "bodyBefore": "With our",
+      "oneClick": "1-click checkout",
+      "bodyMid": "and",
+      "buyerNetwork": "buyer network",
+      "bodyAfter": ", your business gets paid with higher conversion.",
+      "features": [
+        "Buy Button",
+        "1-Click Checkout",
+        "Custom Checkout Domain",
+        "Embeddable Checkout"
+      ]
+    },
+    "toast": {
+      "title": "Profile and address filled in automatically",
+      "cta": "Pay now"
+    }
+  },
+  "testimonials": {
+    "sectionAria": "Mayar customer testimonials",
+    "label": "Testimonials?",
+    "title": "What They Say…",
+    "blurb": "Our users love us — and we keep raising the bar, shipping more features, and co-building with customers for what comes next",
+    "carouselAria": "Organization testimonials — auto-scrolling",
+    "prev": "Previous testimonial",
+    "next": "Next testimonial",
+    "selectAria": "Choose a testimonial",
+    "showQuote": "Show testimonial from {org}",
+    "activeQuote": "Testimonial from {org}",
+    "videos": {
+      "kang-aviv": "How Mayar streamlines class checkout at Kang Aviv Institute",
+      "anang": "A side-income solution for content creators with Anang Marjono",
+      "dinar": "A non-technical-friendly platform for selling digital products with Dinar The HR",
+      "rinaldi": "Manage event tickets & attendees without the hassle — Rinaldi Rizki, KHP Event"
+    },
+    "quotes": {
+      "greenpeace": "The payment features Mayar provides help us accelerate online donation transactions for prospective Greenpeace Indonesia donors. That matters for an organization that always prioritizes donor experience. Crowdfunding and donation tools are useful for us. Most importantly, setup is easy and it integrates with our in-house platform. Customer support has been responsive and solution-oriented so far.",
+      "digitalskola": "This service is very helpful for our payment process — we’d just like to see the dashboard features developed further.",
+      "bossexcel": "mayar.id is an amazing super-app for content creators and educators who want to simplify teaching. From instant payments and landing pages to class features like bundling, cross-selling, and flexible payments — it’s all here. Don’t hesitate to try it for a better teaching and creating experience.",
+      "pacmann": "Mayar makes checkout for Pacmann classes so much easier, especially with many payment options. Setting up payment links is no-code and straightforward, which lightens our workload. Automated email, discount/promo codes, and more also reduce the need to build similar systems ourselves. Support is fast and open to our demanding requests. Thank you, Mayar!",
+      "srz": "Using Mayar has made our sales process much more efficient. Registration for webinars is faster and easier for customers. Mayar also supports our company’s Customer Relationship Management (CRM).",
+      "parenting-berdua": "Alhamdulillah, we’ve partnered with Mayar for several months and it’s been incredibly helpful. The features fully match our needs as an online class and e-book provider.",
+      "hope": "Perhaps the only platform we know that ships feature updates this fast. It’s so complete that fundraising is much easier for us. Thank you to Mayar for always responding quickly when we have questions or issues — and for listening to customers, proven by shipping features we asked for.",
+      "tibra": "I’ve used Mayar for almost a year. I started on free and moved to the business plan because the benefits are huge. We used to handle event payments manually; now it’s far more automated. We use events, discount/promo codes, and payment links the most. The team is open-minded about feedback, so the platform keeps improving.",
+      "yayasan-guru-belajar": "What I love most about Mayar is the API — easy to use and simpler than similar solutions. It made integrating with Yayasan Guru Belajar’s systems faster and smoother.",
+      "anang-quote": "As creators we care a lot about fees — and Mayar is very competitive. The smaller the cut, the more control stays with the creator.",
+      "dinar-quote": "For friends who run a business but aren’t ‘business people’ at heart — Mayar is a great ops partner because it’s easy to use and support is excellent.",
+      "maksimalindiri": "One platform for e-books, webinars, and classes — Mayar makes creator side income far tidier and easier to manage."
+    },
+    "persons": {
+      "bossexcel": "Content creator",
+      "parenting-berdua": "Content creator",
+      "maksimalindiri": "Creator & mentor"
+    }
+  },
+  "caseStudies": {
+    "sectionAria": "Mayar case studies",
+    "title": "Case Studies",
+    "subtitle": "How Mayar helps businesses grow fast with technology",
+    "watch": "Watch the Mayar × {partner} case study film",
+    "prev": "Previous case study",
+    "next": "Next case study"
+  },
+  "press": {
+    "title": "As featured in:",
+    "sectionAria": "As featured in the press"
+  },
+  "finalCta": {
+    "sectionAria": "Sign up now",
+    "titleLine1": "What Are You Waiting For?",
+    "titleLine2": "Sign Up Now.",
+    "body": "Start digitizing and automating your business so you can focus on what matters most",
+    "cta": "Sign up now",
+    "dashAlt": "Mayar Home dashboard preview — balance, QRIS, and business activity"
+  },
+  "footer": {
+    "aria": "Mayar footer",
+    "languageSr": "Language",
+    "languageAria": "Choose language",
+    "certificates": "Certificates & Compliance:",
+    "navAria": "Footer links",
+    "columns": {
+      "industri": {
+        "title": "Industries",
+        "links": [
+          "Learning & Upskilling",
+          "Creator Economy",
+          "Online Retail 2.0",
+          "Event Organizer",
+          "Fundraiser",
+          "Software & SaaS",
+          "Writing & Comic"
+        ]
+      },
+      "teknologi": {
+        "title": "Technology",
+        "links": [
+          "AI Landing Page Builder",
+          "API Docs",
+          "MCP Server",
+          "Video DRM Protection",
+          "Headless Commerce",
+          "Zapier Integration",
+          "Mayar CLI",
+          "Openclaw Skill",
+          "SKILL.md"
+        ]
+      },
+      "bantuan": {
+        "title": "Help",
+        "links": [
+          "Pricing",
+          "Case Studies",
+          "Tutorials",
+          "YouTube",
+          "F.A.Q",
+          "Documentation",
+          "API Reference",
+          "API LLM.txt",
+          "Status",
+          "Changelog",
+          "Free EBooks",
+          "Free Resources",
+          "Free Tools",
+          "Free Online Classes",
+          "Creator Academy",
+          "Demo",
+          "Customer Portal",
+          "Developers",
+          "AI Agents"
+        ]
+      },
+      "perusahaan": {
+        "title": "Company",
+        "links": [
+          "About",
+          "Blog",
+          "Careers",
+          "Open Source",
+          "Open LLM Model",
+          "Press Kit",
+          "Trust Center"
+        ]
+      },
+      "legal": {
+        "title": "Legal",
+        "links": ["Privacy Policy", "Terms of Service"]
+      }
+    },
+    "legal": {
+      "copyright": "© 2022 PT Mayar Kernel Supernova. All rights reserved",
+      "disclaimer": "Mayar is a commerce platform, not a bank or payment gateway. Payment service is provided by connecting merchants to multiple licensed payment service providers partnered with Mayar",
+      "pse": "Registered with PSE Kominfo under number 126400031034800000001",
+      "companionLabel": "Mayar Companion App available at:"
+    },
+    "languages": {
+      "id": "Indonesian",
+      "en": "English"
+    }
+  },
+  "whatsapp": {
+    "aria": "Chat with Mayar on WhatsApp"
+  },
+  "common": {
+    "aria": {
+      "mayar": "Mayar"
+    }
+  }
+}

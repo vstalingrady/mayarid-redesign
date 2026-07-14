@@ -1,16 +1,24 @@
 @import "tailwindcss";
 
+/*
+  Mayar Floating Island specimen + motion system
+*/
+
 :root {
-  --bg: #f7f5f0;
-  --ink: #0f172a;
+  --bg: #f4f2ec;
+  --ink: #0b1220;
   --ink-soft: #1e293b;
   --blue: #2563eb;
   --blue-deep: #1d4ed8;
   --muted: #64748b;
   --muted-faint: #94a3b8;
-  --line: rgba(15, 23, 42, 0.12);
-  --card: rgba(255, 255, 255, 0.72);
-  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --line: rgb(11 18 32 / 0.1);
+  --card: rgb(255 255 255 / 0.78);
+  --card-solid: #ffffff;
+  --shadow-tint: rgb(11 18 32 / 0.12);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --radius-card: 1rem;
+  --radius-pill: 9999px;
 }
 
 @theme inline {
@@ -23,8 +31,9 @@
   --color-muted-faint: var(--muted-faint);
   --color-line: var(--line);
   --color-card: var(--card);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card-solid: var(--card-solid);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
 html {
@@ -34,24 +43,1322 @@ html {
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-sans);
 }
 
-/* Spec mono labels */
 .specimen-label {
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 10px;
-  line-height: 1.45;
-  letter-spacing: 0.04em;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted);
 }
 
-/* Soft ambient (no blur on scroll content) */
 .specimen-glow {
   background: radial-gradient(
-    ellipse 50% 40% at 72% 48%,
-    rgba(37, 99, 235, 0.06),
-    transparent 70%
+    ellipse 48% 42% at 74% 46%,
+    rgb(37 99 235 / 0.05),
+    transparent 68%
   );
+}
+
+.product-glass {
+  border: 1px solid rgb(255 255 255 / 0.7);
+  background:
+    linear-gradient(145deg, rgb(255 255 255 / 0.55), rgb(255 255 255 / 0.28)),
+    var(--card);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.65),
+    0 16px 40px -18px var(--shadow-tint);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  transition:
+    transform 0.35s var(--ease),
+    box-shadow 0.35s var(--ease);
+}
+
+.product-glass:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.65),
+    0 24px 50px -14px var(--shadow-tint);
+}
+
+/* Dashboard metric / chart cards — same lift language as product-glass */
+.dash-card {
+  transition:
+    transform 0.35s var(--ease),
+    box-shadow 0.35s var(--ease),
+    border-color 0.35s var(--ease);
+  box-shadow: 0 1px 0 rgb(15 23 42 / 0.02);
+}
+
+.dash-card:hover {
+  transform: translateY(-4px);
+  border-color: rgb(37 99 235 / 0.18);
+  box-shadow:
+    0 16px 36px -18px rgb(11 18 32 / 0.18),
+    0 0 0 1px rgb(37 99 235 / 0.06);
+}
+
+@keyframes audience-amount-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Vertical profession wheel — soft settle when the active role changes */
+@keyframes audience-wheel-in {
+  from {
+    transform: translateY(8px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .product-glass {
+    background: var(--card-solid);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+.chev {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.chev-right {
+  border-width: 5px 0 5px 7px;
+  border-color: transparent transparent transparent currentColor;
+}
+
+.chev-left {
+  border-width: 5px 7px 5px 0;
+  border-color: transparent currentColor transparent transparent;
+}
+
+.star {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  background: var(--ink);
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+}
+
+/* Mayar original trust stars — warm gold */
+.star-gold {
+  width: 0.78rem;
+  height: 0.78rem;
+  background: #f5b942;
+}
+
+/* ═══════════ MOTION ═══════════
+   Animations only run under .motion-ready (set after mount).
+   Pending state keeps elements invisible so the entrance is obvious.
+*/
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes drop-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes island-bob {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -22px, 0);
+  }
+}
+
+@keyframes shadow-pulse {
+  0%,
+  100% {
+    transform: translateX(-50%) scaleX(1);
+    opacity: 0.95;
+  }
+  50% {
+    transform: translateX(-50%) scaleX(0.82);
+    opacity: 0.4;
+  }
+}
+
+@keyframes draw-line {
+  from {
+    stroke-dashoffset: 60;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes node-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 36px, 0) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes frictionless-glow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.82;
+  }
+}
+
+/* Hide entrances until ready */
+.motion-pending .anim-header,
+.motion-pending .anim-bracket,
+.motion-pending .anim-hud,
+.motion-pending .anim-eyebrow,
+.motion-pending .anim-headline,
+.motion-pending .anim-audience,
+.motion-pending .anim-body,
+.motion-pending .anim-cta,
+.motion-pending .anim-stage,
+.motion-pending .anim-product,
+.motion-pending .anim-annotation,
+.motion-pending .anim-trust,
+.motion-pending .anim-disclaimer,
+.motion-pending .leader-path,
+.motion-pending .leader-node {
+  opacity: 0 !important;
+}
+
+.motion-pending .leader-path {
+  stroke-dashoffset: 60 !important;
+}
+
+/* Play when ready */
+.motion-ready .anim-header {
+  animation: drop-in 0.75s var(--ease) both;
+}
+
+.motion-ready .anim-bracket {
+  animation: fade-in 0.8s var(--ease) 0.15s both;
+}
+
+.motion-ready .anim-hud {
+  animation: fade-in 0.9s var(--ease) 0.4s both;
+}
+
+.motion-ready .anim-eyebrow {
+  animation: fade-up 0.75s var(--ease) 0.15s both;
+}
+
+.motion-ready .anim-headline {
+  animation: fade-up 0.9s var(--ease) 0.28s both;
+}
+
+.motion-ready .anim-audience {
+  animation: fade-up 0.8s var(--ease) 0.45s both;
+}
+
+.motion-ready .anim-body {
+  animation: fade-up 0.8s var(--ease) 0.55s both;
+}
+
+.motion-ready .anim-cta {
+  animation: fade-up 0.8s var(--ease) 0.65s both;
+}
+
+.motion-ready .anim-stage {
+  animation: scale-in 1.05s var(--ease) 0.2s both;
+}
+
+.motion-ready .anim-product {
+  animation: card-rise 0.95s var(--ease) 1s both;
+}
+
+.motion-ready .anim-annotation {
+  animation: fade-in 0.6s var(--ease) both;
+}
+
+.motion-ready .anim-annotation-1 {
+  animation-delay: 0.9s;
+}
+.motion-ready .anim-annotation-2 {
+  animation-delay: 1.05s;
+}
+.motion-ready .anim-annotation-3 {
+  animation-delay: 1.2s;
+}
+.motion-ready .anim-annotation-4 {
+  animation-delay: 1.35s;
+}
+
+.motion-ready .anim-trust {
+  animation: fade-up 0.85s var(--ease) 1.2s both;
+}
+
+.motion-ready .anim-disclaimer {
+  animation: fade-in 0.7s var(--ease) 1.4s both;
+}
+
+/* Island float — wrapper only moves Y so layout classes stay stable */
+.island-bob-wrap {
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+.motion-ready .island-bob-wrap {
+  animation: island-bob 3.8s ease-in-out 0.8s infinite;
+}
+
+.island-shadow {
+  will-change: transform, opacity;
+}
+
+.motion-ready .island-shadow {
+  animation: shadow-pulse 3.8s ease-in-out 0.8s infinite;
+}
+
+/* Leader lines */
+.leader-path {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+}
+
+.motion-ready .leader-path {
+  animation: draw-line 0.85s var(--ease) forwards;
+}
+
+.motion-ready .leader-path-1 {
+  animation-delay: 0.75s;
+}
+.motion-ready .leader-path-2 {
+  animation-delay: 0.9s;
+}
+.motion-ready .leader-path-3 {
+  animation-delay: 1.05s;
+}
+.motion-ready .leader-path-4 {
+  animation-delay: 1.2s;
+}
+
+.leader-node {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.motion-ready .leader-node {
+  animation: node-pop 0.45s var(--ease) forwards;
+}
+
+.motion-ready .leader-node-1 {
+  animation-delay: 1.25s;
+}
+.motion-ready .leader-node-2 {
+  animation-delay: 1.4s;
+}
+.motion-ready .leader-node-3 {
+  animation-delay: 1.55s;
+}
+.motion-ready .leader-node-4 {
+  animation-delay: 1.7s;
+}
+
+/* CTA — single ink pill with white arrow disc nested inside */
+@keyframes cta-shine-sweep {
+  from {
+    transform: translateX(-130%) skewX(-12deg);
+  }
+  to {
+    transform: translateX(130%) skewX(-12deg);
+  }
+}
+
+@keyframes cta-hint-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cta-primary {
+  --cta-h: 2.75rem;
+  --cta-disc: 2.1rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  height: var(--cta-h);
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  padding: 0 0.35rem 0 1.3rem;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1;
+  color: #fff;
+  text-decoration: none;
+  box-shadow:
+    0 10px 26px -12px rgb(11 18 32 / 0.42),
+    inset 0 1px 0 rgb(255 255 255 / 0.06);
+  isolation: isolate;
+  transition:
+    transform 0.28s var(--ease),
+    background-color 0.28s var(--ease),
+    box-shadow 0.28s var(--ease);
+}
+
+@media (min-width: 640px) {
+  .cta-primary {
+    --cta-h: 3rem;
+    --cta-disc: 2.3rem;
+    gap: 0.8rem;
+    padding: 0 0.4rem 0 1.45rem;
+    font-size: 15px;
+  }
+}
+
+.cta-primary:hover,
+.cta-primary:focus-visible {
+  transform: translateY(-2px);
+  background: #121a2a;
+  box-shadow:
+    0 14px 32px -12px rgb(11 18 32 / 0.48),
+    inset 0 1px 0 rgb(255 255 255 / 0.08);
+}
+
+.cta-primary:active {
+  transform: translateY(0) scale(0.985);
+}
+
+.cta-primary .cta-label {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  white-space: nowrap;
+  transition: transform 0.35s var(--ease);
+}
+
+.cta-primary:hover .cta-label,
+.cta-primary:focus-visible .cta-label {
+  transform: translateX(-1px);
+}
+
+/* White disc — fully inside the pill (right inset) */
+.cta-primary .cta-arrow {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--cta-disc);
+  height: var(--cta-disc);
+  border-radius: 9999px;
+  background: #fff;
+  color: var(--blue);
+  box-shadow: 0 1px 2px rgb(11 18 32 / 0.08);
+  /* Rest: tilted 45° — hover snaps upright */
+  transform: rotate(-45deg);
+  transform-origin: 50% 50%;
+  transition:
+    transform 0.45s var(--ease),
+    box-shadow 0.3s var(--ease),
+    color 0.28s var(--ease);
+  will-change: transform;
+}
+
+.cta-primary .cta-arrow-icon {
+  display: block;
+  width: 14px;
+  height: 14px;
+  transition: transform 0.4s var(--ease);
+}
+
+@media (min-width: 640px) {
+  .cta-primary .cta-arrow-icon {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+.cta-primary:hover .cta-arrow,
+.cta-primary:focus-visible .cta-arrow {
+  transform: rotate(0deg) scale(1.05);
+  box-shadow: 0 2px 6px rgb(37 99 235 / 0.2);
+  color: var(--blue-deep);
+}
+
+.cta-primary:hover .cta-arrow-icon,
+.cta-primary:focus-visible .cta-arrow-icon {
+  transform: translateX(1.5px);
+}
+
+.cta-primary:active .cta-arrow {
+  transform: rotate(0deg) scale(0.98);
+}
+
+/* Compact nav CTA — fits the floating island header */
+.cta-primary.cta-nav {
+  --cta-h: 2.125rem;
+  --cta-disc: 1.5rem;
+  gap: 0.45rem;
+  padding: 0 0.22rem 0 0.9rem;
+  font-size: 13px;
+  letter-spacing: -0.01em;
+  box-shadow:
+    0 6px 16px -10px rgb(11 18 32 / 0.38),
+    inset 0 1px 0 rgb(255 255 255 / 0.06);
+}
+
+.cta-primary.cta-nav .cta-arrow-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.cta-primary.cta-nav:hover,
+.cta-primary.cta-nav:focus-visible {
+  transform: translateY(-1px);
+  box-shadow:
+    0 10px 22px -12px rgb(11 18 32 / 0.45),
+    inset 0 1px 0 rgb(255 255 255 / 0.08);
+}
+
+.cta-primary.cta-nav:active {
+  transform: translateY(0) scale(0.985);
+}
+
+@media (min-width: 640px) {
+  .cta-primary.cta-nav {
+    --cta-h: 2.25rem;
+    --cta-disc: 1.6rem;
+    gap: 0.5rem;
+    padding: 0 0.25rem 0 1rem;
+    font-size: 13px;
+  }
+
+  .cta-primary.cta-nav .cta-arrow-icon {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+/* Shine across the whole pill */
+.cta-shine {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  width: 42%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgb(255 255 255 / 0.03) 40%,
+    rgb(255 255 255 / 0.12) 50%,
+    rgb(255 255 255 / 0.03) 60%,
+    transparent 100%
+  );
+  transform: translateX(-130%) skewX(-12deg);
+  opacity: 0;
+}
+
+.cta-primary:hover .cta-shine,
+.cta-primary:focus-visible .cta-shine {
+  opacity: 1;
+  animation: cta-shine-sweep 0.7s var(--ease);
+}
+
+.cta-hint {
+  opacity: 0;
+}
+
+.motion-ready .cta-hint {
+  animation: cta-hint-in 0.55s var(--ease) 1.05s both;
+}
+
+.headline-accent {
+  display: inline-block;
+}
+
+.motion-ready .headline-accent {
+  animation: frictionless-glow 3.2s ease-in-out 1.5s infinite;
+}
+
+.audience-line {
+  will-change: opacity, transform;
+}
+
+/*
+  Soft reduced-motion (marketing specimen):
+  Windows "Show animations" off sets prefers-reduced-motion and previously
+  zeroed every entrance + float. Keep motion for the demo; only ensure
+  content is never stuck invisible before JS hydrates.
+*/
+@media (prefers-reduced-motion: reduce) {
+  .motion-pending .anim-header,
+  .motion-pending .anim-bracket,
+  .motion-pending .anim-hud,
+  .motion-pending .anim-eyebrow,
+  .motion-pending .anim-headline,
+  .motion-pending .anim-audience,
+  .motion-pending .anim-body,
+  .motion-pending .anim-cta,
+  .motion-pending .anim-stage,
+  .motion-pending .anim-product,
+  .motion-pending .anim-annotation,
+  .motion-pending .anim-trust,
+  .motion-pending .anim-disclaimer,
+  .motion-pending .leader-path,
+  .motion-pending .anim-node,
+  .motion-pending .leader-node {
+    opacity: 1 !important;
+  }
+}
+
+/* ── Specimen stage keyframes (inline style animation: names) ── */
+@keyframes goOnlineFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes goOnlineFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes goOnlineFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+@keyframes goOnlineKenBurns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.07);
+  }
+}
+@keyframes goOnlineShine {
+  0% {
+    transform: translateX(-130%) skewX(-12deg);
+  }
+  100% {
+    transform: translateX(280%) skewX(-12deg);
+  }
+}
+@keyframes goOnlineProgress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes goOnlineToastIn {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes goOnlineCheckPop {
+  0% {
+    transform: scale(0.4);
+  }
+  60% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes goOnlineFlow {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+@keyframes goOnlineHubGlow {
+  0%,
+  100% {
+    box-shadow: 0 4px 12px -8px rgb(11 18 32 / 0.12);
+  }
+  50% {
+    box-shadow:
+      0 0 0 4px rgb(37 99 235 / 0.12),
+      0 8px 18px -10px rgb(37 99 235 / 0.28);
+  }
+}
+
+/* Go-online storefront — content swap + toast pop + stage motion */
+@keyframes go-online-swap {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes go-online-stage-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes go-online-image-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes go-online-chip-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes go-online-cta-shine {
+  from {
+    transform: translateX(-120%) skewX(-12deg);
+  }
+  to {
+    transform: translateX(180%) skewX(-12deg);
+  }
+}
+
+@keyframes go-online-price-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-1px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes go-online-badge-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes go-online-frame-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes go-online-toast-in {
+  0% {
+    opacity: 0;
+    transform: translateY(22px) scale(0.88);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes go-online-toast-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes go-online-check-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.18);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes go-online-check-draw {
+  from {
+    stroke-dashoffset: 18;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes go-online-check-ring {
+  0% {
+    box-shadow:
+      0 0 0 0 rgb(16 185 129 / 0.45),
+      0 4px 10px -4px rgb(16 185 129 / 0.7);
+  }
+  70% {
+    box-shadow:
+      0 0 0 10px rgb(16 185 129 / 0),
+      0 4px 10px -4px rgb(16 185 129 / 0.55);
+  }
+  100% {
+    box-shadow:
+      0 0 0 0 rgb(16 185 129 / 0),
+      0 4px 10px -4px rgb(16 185 129 / 0.7);
+  }
+}
+
+@keyframes go-online-toast-line {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes go-online-toast-btn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.go-online-swap {
+  animation: go-online-swap 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Soft continuous cycle — no hard pop every product change */
+@keyframes go-online-cycle {
+  from {
+    opacity: 0.35;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes go-online-kenburns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes go-online-toast-cycle {
+  0% {
+    opacity: 0.55;
+    transform: translateY(6px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.go-online-cycle {
+  animation: go-online-cycle 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.go-online-stage-in {
+  animation: go-online-stage-in 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.go-online-frame-live {
+  animation: go-online-frame-float 5s ease-in-out infinite;
+}
+
+.go-online-image-live {
+  animation: go-online-kenburns 8s ease-in-out infinite alternate;
+}
+
+.go-online-image-in {
+  animation: go-online-image-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.go-online-chip-in {
+  animation: go-online-chip-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.go-online-price-pop {
+  animation: go-online-cycle 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.go-online-badge-in {
+  animation: go-online-cycle 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.go-online-cta {
+  position: relative;
+  overflow: hidden;
+}
+
+.go-online-cta-shine {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 255 255 / 0.28),
+    transparent
+  );
+  animation: go-online-cta-shine 2.8s ease-in-out infinite;
+}
+
+.go-online-toast-cycle {
+  animation:
+    go-online-toast-cycle 0.5s cubic-bezier(0.16, 1, 0.3, 1) both,
+    go-online-toast-float 3.2s ease-in-out 0.5s infinite;
+}
+
+/* Legacy go-online-cta-shine — reduced-motion no longer hard-kills specimen motion */
+
+/* Active product tab — fill left→right until auto-advance */
+@keyframes go-online-tab-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.go-online-tab-progress {
+  transform-origin: left center;
+  animation: go-online-tab-progress linear forwards;
+}
+
+.go-online-toast-in {
+  animation:
+    go-online-toast-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) both,
+    go-online-toast-float 3.2s ease-in-out 0.75s infinite;
+}
+
+.go-online-toast-check {
+  animation:
+    go-online-check-pop 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both,
+    go-online-check-ring 1.4s ease-out 0.35s 1;
+}
+
+.go-online-toast-check-path {
+  stroke-dasharray: 18;
+  stroke-dashoffset: 18;
+  animation: go-online-check-draw 0.4s ease-out 0.38s forwards;
+}
+
+.go-online-toast-copy {
+  animation: go-online-toast-line 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both;
+}
+
+.go-online-toast-btn {
+  animation: go-online-toast-btn 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+/* Integrations hub toast — reuse go-online motion language */
+@keyframes integrations-toast-in {
+  0% {
+    opacity: 0;
+    transform: translateY(22px) scale(0.88);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes integrations-toast-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes integrations-pulse-line {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scaleX(0.92);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes integrations-flow-dot {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes integrations-hub-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgb(37 99 235 / 0),
+      0 4px 12px -8px rgb(11 18 32 / 0.12);
+  }
+  50% {
+    box-shadow:
+      0 0 0 4px rgb(37 99 235 / 0.1),
+      0 8px 18px -10px rgb(37 99 235 / 0.28);
+  }
+}
+
+@keyframes integrations-logo-in {
+  from {
+    transform: translateY(6px) scale(0.88);
+    filter: blur(2px);
+  }
+  to {
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes integrations-logo-pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes integrations-cluster-active {
+  from {
+    transform: scale(0.985);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes integrations-tab-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes integrations-stage-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.integrations-toast-in {
+  animation:
+    integrations-toast-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) both,
+    integrations-toast-float 3.2s ease-in-out 0.75s infinite;
+}
+
+.integrations-toast-check {
+  animation:
+    go-online-check-pop 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both,
+    go-online-check-ring 1.4s ease-out 0.35s 1;
+}
+
+.integrations-toast-check-path {
+  stroke-dasharray: 18;
+  stroke-dashoffset: 18;
+  animation: go-online-check-draw 0.4s ease-out 0.38s forwards;
+}
+
+.integrations-toast-copy {
+  animation: go-online-toast-line 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both;
+}
+
+.integrations-toast-btn {
+  animation: go-online-toast-btn 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+.integrations-pulse {
+  transform-origin: center;
+  animation: integrations-pulse-line 1.8s ease-in-out infinite;
+}
+
+.integrations-flow {
+  position: relative;
+  overflow: visible;
+}
+
+.integrations-flow-dot {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 1;
+  height: 6px;
+  width: 6px;
+  margin-top: -3px;
+  margin-left: -3px;
+  border-radius: 9999px;
+  background: var(--blue);
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 0.18);
+  animation: integrations-flow-dot 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.integrations-hub-live {
+  animation: integrations-hub-glow 2.4s ease-in-out infinite;
+}
+
+.integrations-stage-in {
+  animation: integrations-stage-in 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.integrations-cluster-active {
+  animation: integrations-cluster-active 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.integrations-logo-in {
+  animation: integrations-logo-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.integrations-logo-active {
+  animation: integrations-logo-pop 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Continuous cluster highlight — no remount thrash */
+.integrations-logo-tile {
+  transition:
+    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.45s ease;
+}
+
+.integrations-logo-tile.is-live {
+  opacity: 1;
+  transform: scale(1);
+  box-shadow:
+    0 6px 14px -8px rgb(37 99 235 / 0.35),
+    0 0 0 1px rgb(37 99 235 / 0.15);
+}
+
+.integrations-logo-tile.is-dim {
+  opacity: 0.42;
+  transform: scale(0.97);
+  filter: grayscale(0.15);
+}
+
+.integrations-cluster {
+  transition:
+    border-color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.integrations-toast-cycle {
+  animation:
+    go-online-toast-cycle 0.5s cubic-bezier(0.16, 1, 0.3, 1) both,
+    integrations-toast-float 3.2s ease-in-out 0.5s infinite;
+}
+
+.integrations-tab-progress {
+  transform-origin: left center;
+  animation: integrations-tab-progress linear forwards;
+}
+
+.integrations-frame-live {
+  animation: go-online-frame-float 5.5s ease-in-out infinite;
+}
+
+/* Legacy go-online / integrations class kill-list removed — stage-* lives in motion.css */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

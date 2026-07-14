@@ -39,3 +39,19 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local agent / browser tooling
+.playwright-mcp/
+mcps/
+playwright-*.tgz
+
+# mirrored upstream site (not shipped; ~90MB)
+/reference/
+
+# one-off QA screenshots dropped in repo root
+/*.png
+
+# temp scratch scripts
+_dash.py
+_dims.py
+_measure-*.js

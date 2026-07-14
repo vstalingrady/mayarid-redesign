@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { useI18n } from "@/i18n";
 
 const LOGOS = [
   {
@@ -69,12 +70,13 @@ function useInView(threshold = 0.1) {
  * Stats live on the hero (2 Menit / 149k+ / 96%).
  */
 export function TrustStrip() {
+  const { t } = useI18n();
   const { ref, inView } = useInView();
 
   return (
     <section
       ref={ref}
-      aria-label="Lembaga yang mempercayai Mayar"
+      aria-label={t("trust.sectionAria")}
       className="relative w-full border-y border-line/60 bg-[#eef1f8]"
     >
       <div className="mx-auto max-w-[1100px] px-5 py-7 sm:px-8 sm:py-9 lg:px-10">
@@ -86,7 +88,7 @@ export function TrustStrip() {
             transition: "opacity 0.75s var(--ease), transform 0.83s var(--ease)",
           }}
         >
-          Dipercaya lembaga dan institusi terkemuka di seluruh Indonesia
+          {t("trust.title")}
         </p>
 
         <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-5 sm:gap-x-10 lg:gap-x-12">

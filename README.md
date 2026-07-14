@@ -11,8 +11,10 @@ Speculative **Design Engineer (AI)** specimen for Mayar — **Floating Island** 
 | Layer | Implementation |
 |-------|----------------|
 | UI chrome, labels, lines, card, CTA | **Code** (HTML/CSS/SVG) |
-| Floating island | **Image** `/public/specimen/island.jpg` |
-| Headphones product | **Image** `/public/specimen/headphones.png` |
+| Floating island | **Image** from original page only `/public/specimen/island.png` |
+| Headphones product | **Image** from Magic Layers extract `/public/specimen/headphones.png` |
+
+No AI image generation. Photoreal assets come only from the original specimen / Magic Layers export.
 
 See `docs/ANIMATIONS.md` for what to animate later.
 

@@ -8,7 +8,6 @@ import {
   Command,
   Copy,
   CurrencyCircleDollar,
-  FileText,
   GraduationCap,
   Headphones,
   Heart,
@@ -30,6 +29,7 @@ import {
   type Icon,
 } from "@phosphor-icons/react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useI18n } from "@/i18n";
 
 /* ─── Chart series ─── */
 
@@ -38,29 +38,29 @@ const GREEN_BARS = [12, 18, 22, 20, 16, 24, 28, 22, 30, 26, 34, 72, 28];
 const PINK_BARS = [8, 10, 12, 18, 22, 20, 28, 35, 48, 82, 100, 72, 40];
 const BLUE_BARS = [14, 18, 16, 22, 28, 32, 40, 48, 36, 42, 58, 72, 44];
 
-const SIDEBAR_MAIN: { label: string; Icon: Icon }[] = [
-  { label: "Beranda", Icon: House },
-  { label: "Pelanggan", Icon: Users },
-  { label: "Transaksi", Icon: ChartBar },
-  { label: "Berlangganan", Icon: Repeat },
-  { label: "Order", Icon: ShoppingBag },
-  { label: "Permintaan Pembayaran", Icon: CurrencyCircleDollar },
+const SIDEBAR_MAIN_KEYS: { key: string; Icon: Icon }[] = [
+  { key: "home", Icon: House },
+  { key: "customers", Icon: Users },
+  { key: "transactions", Icon: ChartBar },
+  { key: "subscriptions", Icon: Repeat },
+  { key: "orders", Icon: ShoppingBag },
+  { key: "paymentRequests", Icon: CurrencyCircleDollar },
 ];
 
-const SIDEBAR_PRODUK: { label: string; Icon: Icon }[] = [
-  { label: "Link Pembayaran", Icon: LinkIcon },
-  { label: "Produk Fisik", Icon: TShirt },
-  { label: "Produk Digital", Icon: Package },
-  { label: "Kelas Online", Icon: GraduationCap },
-  { label: "Kelas Cohort", Icon: UsersThree },
-  { label: "Webinar", Icon: VideoCamera },
-  { label: "Event & Acara", Icon: CalendarBlank },
-  { label: "Coaching & Mentoring", Icon: ChalkboardTeacher },
-  { label: "Penggalangan Dana", Icon: Heart },
-  { label: "Paket Berlangganan", Icon: Stack },
-  { label: "E-Book", Icon: BookOpen },
-  { label: "Podcast", Icon: Microphone },
-  { label: "Audio Book", Icon: Headphones },
+const SIDEBAR_PRODUK_KEYS: { key: string; Icon: Icon }[] = [
+  { key: "paymentLink", Icon: LinkIcon },
+  { key: "physical", Icon: TShirt },
+  { key: "digital", Icon: Package },
+  { key: "onlineClass", Icon: GraduationCap },
+  { key: "cohort", Icon: UsersThree },
+  { key: "webinar", Icon: VideoCamera },
+  { key: "events", Icon: CalendarBlank },
+  { key: "coaching", Icon: ChalkboardTeacher },
+  { key: "fundraising", Icon: Heart },
+  { key: "subscriptionPack", Icon: Stack },
+  { key: "ebook", Icon: BookOpen },
+  { key: "podcast", Icon: Microphone },
+  { key: "audiobook", Icon: Headphones },
 ];
 
 /* ─── Hooks ─── */
@@ -91,10 +91,7 @@ function useCountUp(target: number, active: boolean, duration = 1200) {
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    if (!active) {
-      setValue(0);
-      return;
-    }
+    if (!active) return;
     let raf = 0;
     const start = performance.now();
     const tick = (now: number) => {
@@ -107,7 +104,8 @@ function useCountUp(target: number, active: boolean, duration = 1200) {
     return () => cancelAnimationFrame(raf);
   }, [active, target, duration]);
 
-  return value;
+  // When inactive, report 0 without a cascading setState in the effect
+  return active ? value : 0;
 }
 
 function formatIdr(n: number) {
@@ -198,6 +196,7 @@ function ChartCard({
   xRight,
   active,
   delay,
+  lastYearLabel,
 }: {
   title?: string;
   legend: string;
@@ -208,6 +207,7 @@ function ChartCard({
   xRight: string;
   active: boolean;
   delay: number;
+  lastYearLabel: string;
 }) {
   return (
     <FadeIn active={active} delay={delay} from="up">
@@ -215,7 +215,7 @@ function ChartCard({
         <div className="mb-3 flex items-center justify-between gap-2">
           <p className="text-[13px] font-semibold text-[#1e293b]">{title}</p>
           <span className="inline-flex items-center gap-1 rounded-md border border-[#e2e8f0] px-2 py-0.5 text-[11px] text-[#64748b]">
-            Last Year
+            {lastYearLabel}
             <CaretDown size={12} weight="bold" />
           </span>
         </div>
@@ -248,18 +248,17 @@ function DashCard({
   delay?: number;
 }) {
   return (
-    <FadeIn
-      active={active}
-      delay={delay}
-      from="up"
-      className={`rounded-xl border border-[#e8edf3] bg-white ${className}`}
-    >
-      {children}
+    <FadeIn active={active} delay={delay} from="up" className="h-full">
+      {/* Inner shell owns hover so FadeIn's entrance transform doesn't block it */}
+      <div className={`dash-card h-full rounded-xl border border-[#e8edf3] bg-white ${className}`}>
+        {children}
+      </div>
     </FadeIn>
   );
 }
 
 function MayarBeranda({ active }: { active: boolean }) {
+  const { t } = useI18n();
   const saldo = useCountUp(169_884, active, 2100);
   const subs = useCountUp(34, active, 1350);
   const customers = useCountUp(342, active, 1650);
@@ -270,39 +269,44 @@ function MayarBeranda({ active }: { active: boolean }) {
       <aside className="hidden w-[210px] shrink-0 flex-col border-r border-[#eef2f6] bg-[#fafbfc] md:flex">
         <nav className="flex-1 overflow-hidden px-2.5 py-3">
           <ul className="space-y-0.5">
-            {SIDEBAR_MAIN.map(({ label, Icon }, i) => (
-              <li key={label}>
-                <FadeIn active={active} delay={60 + i * 60} from="left">
-                  <div
-                    className={`flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-[12px] ${
-                      i === 0
-                        ? "bg-[#eef2ff] font-medium text-[#2563eb]"
-                        : "text-[#475569]"
-                    }`}
-                  >
-                    <Icon
-                      size={15}
-                      weight={i === 0 ? "fill" : "regular"}
-                      className="shrink-0"
-                    />
-                    <span className="truncate">{label}</span>
-                  </div>
-                </FadeIn>
-              </li>
-            ))}
+            {SIDEBAR_MAIN_KEYS.map(({ key, Icon }, i) => {
+              const label = t(`dashboard.sidebarMain.${key}`);
+              return (
+                <li key={key}>
+                  <FadeIn active={active} delay={60 + i * 60} from="left">
+                    <div
+                      className={`flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-[12px] transition-colors duration-200 ${
+                        i === 0
+                          ? "bg-[#eef2ff] font-medium text-[#2563eb]"
+                          : "text-[#475569] hover:bg-[#f1f5f9] hover:text-[#0f172a]"
+                      }`}
+                    >
+                      <Icon
+                        size={15}
+                        weight={i === 0 ? "fill" : "regular"}
+                        className="shrink-0"
+                      />
+                      <span className="truncate">{label}</span>
+                    </div>
+                  </FadeIn>
+                </li>
+              );
+            })}
           </ul>
           <FadeIn active={active} delay={420} from="left">
             <p className="mb-1 mt-4 px-2.5 text-[10px] font-semibold uppercase tracking-[0.08em] text-[#94a3b8]">
-              Produk
+              {t("dashboard.sidebarProductsHeading")}
             </p>
           </FadeIn>
           <ul className="space-y-0.5">
-            {SIDEBAR_PRODUK.map(({ label, Icon }, i) => (
-              <li key={label}>
+            {SIDEBAR_PRODUK_KEYS.map(({ key, Icon }, i) => (
+              <li key={key}>
                 <FadeIn active={active} delay={450 + i * 42} from="left">
-                  <div className="flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-[12px] text-[#64748b]">
+                  <div className="flex items-center gap-2 rounded-lg px-2.5 py-1.5 text-[12px] text-[#64748b] transition-colors duration-200 hover:bg-[#f1f5f9] hover:text-[#0f172a]">
                     <Icon size={15} weight="regular" className="shrink-0" />
-                    <span className="truncate">{label}</span>
+                    <span className="truncate">
+                      {t(`dashboard.sidebarProducts.${key}`)}
+                    </span>
                   </div>
                 </FadeIn>
               </li>
@@ -315,9 +319,9 @@ function MayarBeranda({ active }: { active: boolean }) {
           </p>
           <button
             type="button"
-            className="mt-1.5 flex w-full items-center justify-between gap-2 rounded-lg bg-[#0f172a] px-2.5 py-2 text-[11px] font-semibold text-white"
+            className="mt-1.5 flex w-full items-center justify-between gap-2 rounded-lg bg-[#0f172a] px-2.5 py-2 text-[11px] font-semibold text-white transition-[transform,background-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:bg-[#1e293b] hover:shadow-[0_8px_18px_-10px_rgb(15_23_42/0.55)] active:scale-[0.98]"
           >
-            COPY PAY-ME LINK
+            {t("dashboard.copyPayMe")}
             <Copy size={14} weight="bold" className="opacity-70" />
           </button>
         </FadeIn>
@@ -332,33 +336,33 @@ function MayarBeranda({ active }: { active: boolean }) {
           className="flex flex-wrap items-center justify-between gap-2 border-b border-[#eef2f6] bg-white px-3 py-2.5 sm:px-5 sm:py-3"
         >
           <div>
-            <p className="text-[11px] text-[#94a3b8]">Mayar CompanyX</p>
+            <p className="text-[11px] text-[#94a3b8]">{t("dashboard.company")}</p>
             <h3 className="text-[1.15rem] font-semibold tracking-tight text-[#0f172a] sm:text-[1.25rem]">
-              Beranda
+              {t("dashboard.homeTitle")}
             </h3>
           </div>
           <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
             <button
               type="button"
-              className="hidden items-center gap-1.5 rounded-lg border border-[#e2e8f0] px-2.5 py-1.5 text-[11px] text-[#64748b] sm:inline-flex"
+              className="hidden items-center gap-1.5 rounded-lg border border-[#e2e8f0] px-2.5 py-1.5 text-[11px] text-[#64748b] transition-[transform,background-color,border-color,color] duration-200 hover:-translate-y-0.5 hover:border-[#cbd5e1] hover:bg-[#f8fafc] hover:text-[#0f172a] sm:inline-flex"
             >
               <Command size={13} weight="bold" />
-              Quick Actions
+              {t("dashboard.quickActions")}
             </button>
             <button
               type="button"
-              className="inline-flex items-center gap-1 rounded-lg border border-[#2563eb] px-2.5 py-1.5 text-[11px] font-semibold text-[#2563eb]"
+              className="inline-flex items-center gap-1 rounded-lg border border-[#2563eb] px-2.5 py-1.5 text-[11px] font-semibold text-[#2563eb] transition-[transform,background-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:bg-[#eff6ff] hover:shadow-[0_6px_14px_-8px_rgb(37_99_235/0.45)]"
             >
               <Plus size={13} weight="bold" />
-              PRODUK
+              {t("dashboard.productBtn")}
               <CaretDown size={11} weight="bold" />
             </button>
             <button
               type="button"
-              className="inline-flex items-center gap-1 rounded-lg bg-[#2563eb] px-2.5 py-1.5 text-[11px] font-semibold text-white"
+              className="inline-flex items-center gap-1 rounded-lg bg-[#2563eb] px-2.5 py-1.5 text-[11px] font-semibold text-white transition-[transform,background-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:bg-[#1d4ed8] hover:shadow-[0_8px_16px_-8px_rgb(37_99_235/0.55)]"
             >
               <Plus size={13} weight="bold" />
-              BUAT
+              {t("dashboard.createBtn")}
               <CaretDown size={11} weight="bold" />
             </button>
           </div>
@@ -369,16 +373,18 @@ function MayarBeranda({ active }: { active: boolean }) {
             <DashCard active={active} delay={180} className="p-4 sm:p-5">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="text-[12px] text-[#64748b]">Total Saldo</p>
+                  <p className="text-[12px] text-[#64748b]">
+                    {t("dashboard.totalBalance")}
+                  </p>
                   <p className="mt-1 text-[1.65rem] font-semibold tabular-nums tracking-tight text-[#0f172a] sm:text-[1.85rem]">
                     Rp {formatIdr(saldo)}
                   </p>
                 </div>
                 <button
                   type="button"
-                  className="shrink-0 rounded-md border border-[#2563eb] px-3 py-1 text-[11px] font-semibold text-[#2563eb] transition-transform active:scale-95"
+                  className="shrink-0 rounded-md border border-[#2563eb] px-3 py-1 text-[11px] font-semibold text-[#2563eb] transition-[transform,background-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:bg-[#eff6ff] hover:shadow-[0_6px_12px_-8px_rgb(37_99_235/0.4)] active:scale-95"
                 >
-                  TOP-UP
+                  {t("dashboard.topUp")}
                 </button>
               </div>
             </DashCard>
@@ -386,7 +392,9 @@ function MayarBeranda({ active }: { active: boolean }) {
             <DashCard active={active} delay={300} className="p-4 sm:p-5">
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <p className="text-[12px] text-[#64748b]">PayMe Link Anda</p>
+                  <p className="text-[12px] text-[#64748b]">
+                    {t("dashboard.payMeLink")}
+                  </p>
                   <p className="mt-1 flex items-center gap-1 truncate text-[14px] font-medium text-[#2563eb] sm:text-[15px]">
                     mayar.to/namabisnis
                     <ArrowSquareOut size={14} weight="bold" />
@@ -394,10 +402,10 @@ function MayarBeranda({ active }: { active: boolean }) {
                 </div>
                 <button
                   type="button"
-                  className="inline-flex shrink-0 items-center gap-1 rounded-md border border-[#e2e8f0] px-3 py-1 text-[11px] font-semibold text-[#475569]"
+                  className="inline-flex shrink-0 items-center gap-1 rounded-md border border-[#e2e8f0] px-3 py-1 text-[11px] font-semibold text-[#475569] transition-[transform,background-color,border-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:border-[#cbd5e1] hover:bg-[#f8fafc] hover:shadow-[0_6px_12px_-8px_rgb(15_23_42/0.2)]"
                 >
                   <Copy size={12} weight="bold" />
-                  COPY
+                  {t("dashboard.copy")}
                 </button>
               </div>
             </DashCard>
@@ -405,13 +413,17 @@ function MayarBeranda({ active }: { active: boolean }) {
 
           <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
             <DashCard active={active} delay={390} className="p-4">
-              <p className="text-[12px] text-[#64748b]">Jumlah Berlangganan</p>
+              <p className="text-[12px] text-[#64748b]">
+                {t("dashboard.subscriptionCount")}
+              </p>
               <p className="mt-1 text-[1.5rem] font-semibold tabular-nums text-[#0f172a]">
                 {subs}
               </p>
             </DashCard>
             <DashCard active={active} delay={480} className="p-4">
-              <p className="text-[12px] text-[#64748b]">Jumlah Pelanggan</p>
+              <p className="text-[12px] text-[#64748b]">
+                {t("dashboard.customerCount")}
+              </p>
               <p className="mt-1 text-[1.5rem] font-semibold tabular-nums text-[#0f172a]">
                 {customers}
               </p>
@@ -423,7 +435,9 @@ function MayarBeranda({ active }: { active: boolean }) {
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0">
-                  <p className="text-[12px] text-[#64748b]">Mayar Simple POS</p>
+                  <p className="text-[12px] text-[#64748b]">
+                    {t("dashboard.simplePos")}
+                  </p>
                   <p className="mt-1 flex items-center gap-1 truncate text-[13px] font-medium text-[#2563eb]">
                     pos.mayar.to/namabisnis
                     <ArrowSquareOut size={13} weight="bold" />
@@ -431,10 +445,10 @@ function MayarBeranda({ active }: { active: boolean }) {
                 </div>
                 <button
                   type="button"
-                  className="inline-flex shrink-0 items-center gap-1 rounded-md border border-[#e2e8f0] px-2.5 py-1 text-[11px] font-semibold text-[#475569]"
+                  className="inline-flex shrink-0 items-center gap-1 rounded-md border border-[#e2e8f0] px-2.5 py-1 text-[11px] font-semibold text-[#475569] transition-[transform,background-color,border-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:border-[#cbd5e1] hover:bg-[#f8fafc] hover:shadow-[0_6px_12px_-8px_rgb(15_23_42/0.2)]"
                 >
                   <Copy size={12} weight="bold" />
-                  COPY
+                  {t("dashboard.copy")}
                 </button>
               </div>
             </DashCard>
@@ -444,19 +458,19 @@ function MayarBeranda({ active }: { active: boolean }) {
             <FadeIn active={active} delay={660} from="scale">
               <button
                 type="button"
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#2563eb] py-3 text-[12px] font-bold tracking-wide text-white shadow-sm transition-transform active:scale-[0.98] sm:text-[13px]"
+                className="dash-action flex w-full items-center justify-center gap-2 rounded-lg bg-[#2563eb] py-3 text-[12px] font-bold tracking-wide text-white shadow-sm transition-[transform,box-shadow,background-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:bg-[#1d4ed8] hover:shadow-[0_14px_28px_-12px_rgb(37_99_235/0.55)] active:scale-[0.98] sm:text-[13px]"
               >
                 <QrCode size={18} weight="bold" />
-                BUKA QRIS STATIS
+                {t("dashboard.openQris")}
               </button>
             </FadeIn>
             <FadeIn active={active} delay={750} from="scale">
               <button
                 type="button"
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#f5c518] py-3 text-[12px] font-bold tracking-wide text-[#1e293b] shadow-sm transition-transform active:scale-[0.98] sm:text-[13px]"
+                className="dash-action flex w-full items-center justify-center gap-2 rounded-lg bg-[#f5c518] py-3 text-[12px] font-bold tracking-wide text-[#1e293b] shadow-sm transition-[transform,box-shadow,background-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:bg-[#f0b800] hover:shadow-[0_14px_28px_-12px_rgb(245_197_24/0.55)] active:scale-[0.98] sm:text-[13px]"
               >
                 <CurrencyCircleDollar size={18} weight="fill" />
-                TAGIH PAKAI QRIS
+                {t("dashboard.chargeQris")}
               </button>
             </FadeIn>
           </div>
@@ -465,47 +479,51 @@ function MayarBeranda({ active }: { active: boolean }) {
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
               <div className="space-y-5">
                 <ChartCard
-                  title="Aktivitas Bisnis"
-                  legend="Pelanggan Baru"
+                  title={t("dashboard.businessActivity")}
+                  legend={t("dashboard.newCustomers")}
                   legendColor="#f59e0b"
                   bars={ORANGE_BARS}
                   barColor="#f59e0b"
-                  xLeft="Des 2021"
-                  xRight="Today"
+                  xLeft={t("dashboard.dec2021")}
+                  xRight={t("dashboard.today")}
                   active={active}
                   delay={870}
+                  lastYearLabel={t("dashboard.lastYear")}
                 />
                 <ChartCard
-                  legend="Transaksi"
+                  legend={t("dashboard.transactions")}
                   legendColor="#22c55e"
                   bars={GREEN_BARS}
                   barColor="#22c55e"
-                  xLeft="Des 2021"
-                  xRight="Today"
+                  xLeft={t("dashboard.dec2021")}
+                  xRight={t("dashboard.today")}
                   active={active}
                   delay={1110}
+                  lastYearLabel={t("dashboard.lastYear")}
                 />
               </div>
               <div className="space-y-5">
                 <ChartCard
-                  legend="Pengunjung"
+                  legend={t("dashboard.visitors")}
                   legendColor="#f43f5e"
                   bars={PINK_BARS}
                   barColor="#f43f5e"
-                  xLeft="Jan 2022"
-                  xRight="Today"
+                  xLeft={t("dashboard.jan2022")}
+                  xRight={t("dashboard.today")}
                   active={active}
                   delay={990}
+                  lastYearLabel={t("dashboard.lastYear")}
                 />
                 <ChartCard
-                  legend="Rp Pembayaran"
+                  legend={t("dashboard.paymentAmount")}
                   legendColor="#3b82f6"
                   bars={BLUE_BARS}
                   barColor="#3b82f6"
-                  xLeft="Des 2021"
-                  xRight="Today"
+                  xLeft={t("dashboard.dec2021")}
+                  xRight={t("dashboard.today")}
                   active={active}
                   delay={1230}
+                  lastYearLabel={t("dashboard.lastYear")}
                 />
               </div>
             </div>
@@ -521,6 +539,7 @@ function MayarBeranda({ active }: { active: boolean }) {
  * Scroll into view → staggered fade-ins, count-ups, chart grow.
  */
 export function ProductDashboard() {
+  const { t } = useI18n();
   const { ref, inView } = useInView(0.18);
 
   return (
@@ -532,15 +551,14 @@ export function ProductDashboard() {
       <div className="mx-auto max-w-[1120px]">
         <div className="mx-auto max-w-2xl text-center">
           <p className="specimen-label text-[10px] tracking-[0.16em] text-muted">
-            Satu dashboard · semua penjualan
+            {t("dashboard.eyebrow")}
           </p>
           <h2 className="mt-3 text-[1.65rem] font-bold tracking-tight text-ink sm:text-3xl lg:text-[2.15rem]">
-            Kelola bisnis dari{" "}
-            <span className="text-blue">satu layar</span>
+            {t("dashboard.titleBefore")}{" "}
+            <span className="text-blue">{t("dashboard.titleHighlight")}</span>
           </h2>
           <p className="mx-auto mt-3 max-w-[42ch] text-[14px] leading-relaxed text-muted sm:text-[15px]">
-            Saldo, pelanggan, link pembayaran, QRIS, dan aktivitas — semua di
-            Beranda Mayar. Scroll ke sini, biar hidup.
+            {t("dashboard.subtitle")}
           </p>
         </div>
 
@@ -570,7 +588,7 @@ export function ProductDashboard() {
                 </div>
                 <div className="mx-auto flex min-w-0 max-w-[min(100%,28rem)] flex-1 justify-center">
                   <div className="w-full truncate rounded-md border border-line/70 bg-white px-3 py-1 text-center text-[11px] text-muted sm:text-[12px]">
-                    web.mayar.id · Beranda
+                    {t("dashboard.browserUrl")}
                   </div>
                 </div>
                 <div className="w-10 shrink-0" aria-hidden />
@@ -591,13 +609,12 @@ export function ProductDashboard() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-60" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
             </span>
-            Live demo
+            {t("dashboard.liveDemo")}
           </div>
         </div>
 
         <p className="mx-auto mt-8 max-w-lg text-center text-[13px] text-muted">
-          Satu link pembayaran, ratusan produk digital &amp; fisik, kelas online,
-          dan langganan — semua terhubung ke saldo yang sama.
+          {t("dashboard.footerNote")}
         </p>
       </div>
     </section>

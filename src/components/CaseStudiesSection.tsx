@@ -14,6 +14,28 @@ import { useI18n } from "@/i18n";
 
 const N = CASE_STUDIES.length;
 
+function gapOf(el: HTMLElement) {
+  return (
+    parseFloat(getComputedStyle(el).columnGap || getComputedStyle(el).gap) || 16
+  );
+}
+
+function stepOf(el: HTMLElement) {
+  const card = el.querySelector<HTMLElement>("[data-case-card]");
+  if (!card) return 0;
+  return card.offsetWidth + gapOf(el);
+}
+
+function slotFromScroll(el: HTMLElement) {
+  const step = stepOf(el);
+  if (step <= 0) return N;
+  return Math.round(el.scrollLeft / step);
+}
+
+function logicalFromSlot(slot: number) {
+  return ((slot % N) + N) % N;
+}
+
 /**
  * Studi Kasus carousel — one focal video always dead-center, with
  * neighbor peeks on BOTH sides at every position (including first/last).
@@ -26,56 +48,30 @@ export function CaseStudiesSection() {
   const { t } = useI18n();
   const scrollerRef = useRef<HTMLDivElement>(null);
   const settlingRef = useRef(false);
-  // Logical index into CASE_STUDIES (0..N-1)
   const [active, setActive] = useState(0);
 
-  // Triple track so we can always peek left + right
   const track = [...CASE_STUDIES, ...CASE_STUDIES, ...CASE_STUDIES];
 
-  const gapOf = (el: HTMLElement) =>
-    parseFloat(getComputedStyle(el).columnGap || getComputedStyle(el).gap) ||
-    16;
+  const scrollToSlot = useCallback(
+    (slot: number, behavior: ScrollBehavior) => {
+      const el = scrollerRef.current;
+      if (!el) return;
+      const step = stepOf(el);
+      if (step <= 0) return;
+      el.scrollTo({ left: slot * step, behavior });
+    },
+    [],
+  );
 
-  const stepOf = (el: HTMLElement) => {
-    const card = el.querySelector<HTMLElement>("[data-case-card]");
-    if (!card) return 0;
-    return card.offsetWidth + gapOf(el);
-  };
-
-  /** Scroll so track-slot `slot` is dead-center. */
-  const scrollToSlot = useCallback((slot: number, behavior: ScrollBehavior) => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const step = stepOf(el);
-    if (step <= 0) return;
-    el.scrollTo({ left: slot * step, behavior });
-  }, []);
-
-  /** Map current scrollLeft → nearest track slot. */
-  const slotFromScroll = (el: HTMLElement) => {
-    const step = stepOf(el);
-    if (step <= 0) return N; // middle-set first card
-    return Math.round(el.scrollLeft / step);
-  };
-
-  const logicalFromSlot = (slot: number) =>
-    ((slot % N) + N) % N;
-
-  /**
-   * If we've drifted into the first or third copy of the track, jump to
-   * the equivalent card in the middle copy with no animation.
-   */
   const rehomeIfNeeded = useCallback(() => {
     const el = scrollerRef.current;
     if (!el || settlingRef.current) return;
     const slot = slotFromScroll(el);
-    // Middle set is slots [N, 2N). Keep a 1-card buffer on each side.
     if (slot < N || slot >= 2 * N) {
       const logical = logicalFromSlot(slot);
       const target = N + logical;
       settlingRef.current = true;
       el.scrollTo({ left: target * stepOf(el), behavior: "auto" });
-      // Allow the browser to apply the jump before re-enabling
       requestAnimationFrame(() => {
         settlingRef.current = false;
         setActive(logical);
@@ -92,23 +88,19 @@ export function CaseStudiesSection() {
     setActive(logicalFromSlot(slotFromScroll(el)));
   }, []);
 
-  const scrollByDir = useCallback(
-    (dir: -1 | 1) => {
-      const el = scrollerRef.current;
-      if (!el) return;
-      const step = stepOf(el);
-      if (step <= 0) return;
-      el.scrollBy({ left: dir * step, behavior: "smooth" });
-    },
-    [],
-  );
+  const scrollByDir = useCallback((dir: -1 | 1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const step = stepOf(el);
+    if (step <= 0) return;
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
+  }, []);
 
   const onCardClick = useCallback(
     (e: MouseEvent<HTMLAnchorElement>, slot: number) => {
       const el = scrollerRef.current;
       if (!el) return;
       const current = slotFromScroll(el);
-      // Clicking a side peek: center it instead of navigating away
       if (slot !== current) {
         e.preventDefault();
         scrollToSlot(slot, "smooth");
@@ -121,7 +113,6 @@ export function CaseStudiesSection() {
     const el = scrollerRef.current;
     if (!el) return;
 
-    // Start on the middle set's first card — left peek = last video
     const placeFirst = () => {
       scrollToSlot(N, "auto");
       setActive(0);
@@ -133,12 +124,10 @@ export function CaseStudiesSection() {
     const onScroll = () => {
       syncFromScroll();
       if (scrollEndTimer) clearTimeout(scrollEndTimer);
-      // Re-home after snap/smooth scroll settles
       scrollEndTimer = setTimeout(() => rehomeIfNeeded(), 140);
     };
 
     const keepCentered = () => {
-      // Re-center whatever logical card is active after a width change
       const logical = logicalFromSlot(slotFromScroll(el));
       scrollToSlot(N + logical, "auto");
       setActive(logical);
@@ -205,11 +194,6 @@ export function CaseStudiesSection() {
           </button>
         </div>
 
-        {/*
-          Side padding centers one card. Width tokens must match card
-          classes below so first/last (and every) slot can sit dead-center
-          with equal peeks on both flanks.
-        */}
         <div
           ref={scrollerRef}
           className={[
@@ -223,11 +207,9 @@ export function CaseStudiesSection() {
           {track.map((c, slot) => {
             const logical = slot % N;
             const isActive = logical === active;
-            // Unique key across the triple track
-            const key = `${c.id}-${slot}`;
             return (
               <a
-                key={key}
+                key={`${c.id}-${slot}`}
                 data-case-card
                 data-active={isActive ? "true" : "false"}
                 href={c.videoHref}

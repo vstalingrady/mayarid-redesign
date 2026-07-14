@@ -1,0 +1,545 @@
+{
+  "nav": {
+    "products": "Produk",
+    "solutions": "Solusi",
+    "pricing": "Harga",
+    "docs": "Docs",
+    "login": "Masuk",
+    "signup": "Daftar",
+    "mainAria": "Utama",
+    "mobileAria": "Mobile",
+    "openMenu": "Buka menu",
+    "closeMenu": "Tutup menu"
+  },
+  "hero": {
+    "titleLine1": "Frictionless",
+    "titleLine2": "Online Checkout",
+    "titleLine3": "and Payment",
+    "for": "for",
+    "body": "Mayar memudahkan bisnis untuk menerima pembayaran, mengelola pelanggan, dan menjual produk & jasa dengan mudah dalam satu platform",
+    "cta": "Mulai gratis",
+    "ctaHintBefore": "Setup di bawah",
+    "ctaHintTime": "2 menit",
+    "ctaHintFree": "· gratis"
+  },
+  "audiences": {
+    "regionAria": "Audience",
+    "scenesAria": "Audience scenes",
+    "show": "Tampilkan {label}",
+    "forLabel": "for {label}",
+    "items": {
+      "any-business": {
+        "label": "Any Business",
+        "product": "Pembayaran Online",
+        "status": "Baru dibayar",
+        "alt": "Pemilik usaha merayakan pembayaran berhasil"
+      },
+      "educators": {
+        "label": "Educators",
+        "product": "Kelas Online Batch 12",
+        "status": "Baru dibayar",
+        "alt": "Pendidik online setelah siswa membayar kelas"
+      },
+      "creators": {
+        "label": "Creators",
+        "product": "Digital Course Pack",
+        "status": "Baru dibayar",
+        "alt": "Kreator mengecek pembayaran berhasil di laptop"
+      },
+      "social-sellers": {
+        "label": "Social Sellers",
+        "product": "Paket Bundle 3 pcs",
+        "status": "Baru dibayar",
+        "alt": "Penjual sosial mengemas pesanan setelah penjualan"
+      },
+      "freelancers": {
+        "label": "Freelancers",
+        "product": "Brand Design Project",
+        "status": "Baru dibayar",
+        "alt": "Freelancer mengonfirmasi pembayaran klien di kafe"
+      }
+    }
+  },
+  "trust": {
+    "title": "Dipercaya lembaga dan institusi terkemuka di seluruh Indonesia",
+    "sectionAria": "Lembaga yang mempercayai Mayar",
+    "badgeBefore": "Dipercaya",
+    "badgeBusinesses": "Bisnis",
+    "badgeSatisfaction": "kepuasan pelanggan",
+    "ratingAria": "Rating 5 dari 5",
+    "avatars": {
+      "maksimalindiri": { "name": "Maksimalindiri", "role": "Kreator & mentor" },
+      "tres": { "name": "Tres", "role": "Content creator" },
+      "bossexcel": { "name": "Boss Excel", "role": "Educator · bossexcel.id" },
+      "anang": { "name": "Anang Marjono", "role": "Content creator" },
+      "dinar": { "name": "Dinar The HR", "role": "HR educator" }
+    }
+  },
+  "dashboard": {
+    "eyebrow": "Satu dashboard · semua penjualan",
+    "titleBefore": "Kelola bisnis dari",
+    "titleHighlight": "satu layar",
+    "subtitle": "Saldo, pelanggan, link pembayaran, QRIS, dan aktivitas — semua di Beranda Mayar. Scroll ke sini, biar hidup.",
+    "browserUrl": "web.mayar.id · Beranda",
+    "liveDemo": "Live demo",
+    "footerNote": "Satu link pembayaran, ratusan produk digital & fisik, kelas online, dan langganan — semua terhubung ke saldo yang sama.",
+    "sidebarMain": {
+      "home": "Beranda",
+      "customers": "Pelanggan",
+      "transactions": "Transaksi",
+      "subscriptions": "Berlangganan",
+      "orders": "Order",
+      "paymentRequests": "Permintaan Pembayaran"
+    },
+    "sidebarProductsHeading": "Produk",
+    "sidebarProducts": {
+      "paymentLink": "Link Pembayaran",
+      "physical": "Produk Fisik",
+      "digital": "Produk Digital",
+      "onlineClass": "Kelas Online",
+      "cohort": "Kelas Cohort",
+      "webinar": "Webinar",
+      "events": "Event & Acara",
+      "coaching": "Coaching & Mentoring",
+      "fundraising": "Penggalangan Dana",
+      "subscriptionPack": "Paket Berlangganan",
+      "ebook": "E-Book",
+      "podcast": "Podcast",
+      "audiobook": "Audio Book"
+    },
+    "copyPayMe": "COPY PAY-ME LINK",
+    "company": "Mayar CompanyX",
+    "homeTitle": "Beranda",
+    "quickActions": "Quick Actions",
+    "productBtn": "PRODUK",
+    "createBtn": "BUAT",
+    "totalBalance": "Total Saldo",
+    "topUp": "TOP-UP",
+    "payMeLink": "PayMe Link Anda",
+    "copy": "COPY",
+    "subscriptionCount": "Jumlah Berlangganan",
+    "customerCount": "Jumlah Pelanggan",
+    "simplePos": "Mayar Simple POS",
+    "openQris": "BUKA QRIS STATIS",
+    "chargeQris": "TAGIH PAKAI QRIS",
+    "businessActivity": "Aktivitas Bisnis",
+    "newCustomers": "Pelanggan Baru",
+    "transactions": "Transaksi",
+    "visitors": "Pengunjung",
+    "paymentAmount": "Rp Pembayaran",
+    "lastYear": "Last Year",
+    "today": "Today",
+    "dec2021": "Des 2021",
+    "jan2022": "Jan 2022"
+  },
+  "products": {
+    "eyebrow": "Sell anything, anywhere, to anyone",
+    "title": "Jual Produk & Jasa Apapun dengan Mudah",
+    "subtitle": "Sistem yang sudah disesuaikan dan otomatis untuk menjual berbagai macam produk dan jasa di internet dengan mudah dan cepat.",
+    "families": {
+      "payment": "Pembayaran",
+      "physical": "Fisik",
+      "digital": "Digital",
+      "live": "Live & Belajar",
+      "content": "Konten",
+      "saas": "SaaS & Membership",
+      "fundraise": "Galang Dana"
+    },
+    "types": {
+      "link-pembayaran": "Link Pembayaran",
+      "produk-fisik": "Produk Fisik",
+      "produk-digital": "Produk Digital",
+      "kelas-online": "Kelas Online",
+      "kelas-cohort": "Kelas Cohort / Bootcamp",
+      "webinar": "Webinar",
+      "event-acara": "Event & Acara",
+      "penggalangan-dana": "Penggalangan Dana",
+      "e-book": "E-Book",
+      "podcast": "Podcast",
+      "audio-book": "Audio Book",
+      "tulisan": "Tulisan",
+      "web-komik": "Web Komik",
+      "membership": "Membership",
+      "saas": "SaaS",
+      "lisensi-software": "Lisensi Software",
+      "produk-credit": "Produk Berbasis Credit",
+      "coaching": "Coaching & Mentoring"
+    },
+    "alts": {
+      "link-pembayaran": "Pembayaran digital lewat kartu dan ponsel",
+      "produk-fisik": "Paket produk fisik siap dikirim",
+      "produk-digital": "Laptop di meja kerja produk digital",
+      "lisensi-software": "Layar kode dan lisensi software",
+      "kelas-online": "Ruang kelas dan pembelajaran online",
+      "kelas-cohort": "Kelompok belajar cohort di meja bersama",
+      "webinar": "Webinar video conference di laptop",
+      "event-acara": "Panggung event dan audiens",
+      "coaching": "Sesi coaching dan mentoring one-on-one",
+      "e-book": "Tumpukan buku dan bacaan digital",
+      "podcast": "Mikrofon studio podcast",
+      "audio-book": "Headphone untuk audio book",
+      "tulisan": "Menulis artikel di mesin ketik dan kertas",
+      "web-komik": "Ilustrasi dan komik digital",
+      "membership": "Tim membership dalam rapat kolaborasi",
+      "saas": "Dashboard analytics SaaS di laptop",
+      "produk-credit": "Koin dan kredit digital",
+      "penggalangan-dana": "Galang dana dan donasi komunitas"
+    }
+  },
+  "features": {
+    "eyebrow": "Otomatisasi bisnis dengan teknologi",
+    "title": "Fitur All-in-One Terintegrasi",
+    "subtitle": "Mulai dari buat halaman web, landing page, checkout, terima pembayaran digital, kirim invoice, kelola order, buat kampanye marketing hingga manajemen pelanggan",
+    "hubLabel": "Mayar",
+    "hubHint": "Satu platform · semua alur",
+    "graphAria": "Peta integrasi fitur Mayar",
+    "linkedTo": "terhubung ke {count} fitur lain",
+    "domains": {
+      "sell": "Jual",
+      "pay": "Bayar",
+      "run": "Operasi",
+      "grow": "Tumbuh",
+      "platform": "Platform"
+    },
+    "nodes": {
+      "landing-page": { "label": "Landing Page", "short": "Landing" },
+      "one-click-checkout": { "label": "1-Click Checkout", "short": "Checkout" },
+      "online-payments": { "label": "Online Payments", "short": "Payments" },
+      "order-management": { "label": "Order Management", "short": "Orders" },
+      "analytics": { "label": "Analytics", "short": "Analytics" },
+      "customer-portal": { "label": "Customer Portal", "short": "Portal" },
+      "payment-link": { "label": "Payment Link", "short": "Pay Link" },
+      "billing-system": { "label": "Billing System", "short": "Billing" },
+      "discount-code": { "label": "Discount Code", "short": "Discount" },
+      "payment-reminder": { "label": "Payment Reminder", "short": "Reminder" },
+      "marketing-tools": { "label": "Marketing Tools", "short": "Marketing" },
+      "notification": { "label": "Notification", "short": "Notify" },
+      "wa-telegram": { "label": "WA & Telegram", "short": "Chat" },
+      "finance-tools": { "label": "Finance Tools", "short": "Finance" },
+      "webhooks": { "label": "Webhooks", "short": "Hooks" },
+      "api-mcp": { "label": "API & MCP", "short": "API" },
+      "google-sheet": { "label": "Google Sheets", "short": "Sheets" },
+      "iso-soc2": { "label": "ISO 27001 & SOC2", "short": "Security" }
+    }
+  },
+  "goOnline": {
+    "eyebrow": "Jual produk dan jasa apapun",
+    "title": "Hemat Waktu. Go Online dalam 2 Menit",
+    "body1": "Jual produk dan jasa apapun di Internet semakin mudah dengan Mayar. Fitur Web Landing Page, Katalog, Checkout, Manajemen Order & Pelanggan yang otomatis menyesuaikan dengan produk/jasa yang dijual.",
+    "body2": "Menjadikan Mayar satu-satunya platform dengan pendekatan industry-agnostic.",
+    "tabsAria": "Contoh produk (otomatis berganti)",
+    "login": "Login",
+    "paymentSuccess": "Pembayaran Sukses",
+    "amountPrefix": "Sejumlah",
+    "items": {
+      "kelas-online": {
+        "badge": "5 Materi",
+        "title": "Course: Membangun Web App dengan Softskill",
+        "price": "Rp 0",
+        "priceHint": "Mulai dari 14k/bulan",
+        "blurb": "Video courses membuat fully functional aplikasi berbasis web menggunakan tools no-code seperti Soft. Mayar serta Canva.",
+        "cta": "Beli Sekarang",
+        "toastAction": "Masuk Kelas",
+        "toastAmount": "Rp 149.000",
+        "imageCaption": "Modern Life Coach",
+        "imageSub": "Business Coach · Landing Page",
+        "stats": ["2 Bacaan", "5 Video", "5 Kuis", "2 Coaching", "5 Files"]
+      },
+      "e-book": {
+        "badge": "E-Book",
+        "title": "Playbook: Frictionless Checkout untuk Creator",
+        "price": "Rp 77.000",
+        "priceHint": "Sekali bayar · akses seumur hidup",
+        "blurb": "Panduan praktis setup landing page, katalog, dan checkout Mayar agar produk digitalmu siap dijual dalam hitungan menit.",
+        "cta": "Beli Sekarang",
+        "toastAction": "Download E-Book",
+        "toastAmount": "Rp 77.000",
+        "imageCaption": "Creator Playbook",
+        "imageSub": "PDF · 48 halaman",
+        "stats": ["48 Halaman", "12 Template", "PDF", "Update gratis"]
+      },
+      "membership": {
+        "badge": "Membership",
+        "title": "Club: Akses Konten Premium Bulanan",
+        "price": "Rp 49.000",
+        "priceHint": "/ bulan · batalkan kapan saja",
+        "blurb": "Langganan konten, komunitas, dan sesi live. Pembayaran berulang otomatis — pelanggan masuk, kamu fokus create.",
+        "cta": "Langganan",
+        "toastAction": "Akses Membership",
+        "toastAmount": "Rp 49.000",
+        "imageCaption": "Premium Club",
+        "imageSub": "Komunitas · Live · Arsip",
+        "stats": ["Live weekly", "Arsip", "Komunitas", "Badge"]
+      },
+      "webinar": {
+        "badge": "Webinar",
+        "title": "Webinar: Launch Produk Digital Minggu Ini",
+        "price": "Rp 25.000",
+        "priceHint": "Termasuk rekaman 30 hari",
+        "blurb": "Sesi live 90 menit + Q&A. Tiket, reminder, dan akses rekaman otomatis setelah pembayaran sukses.",
+        "cta": "Ambil Tiket",
+        "toastAction": "Buka Tiket",
+        "toastAmount": "Rp 25.000",
+        "imageCaption": "Live Session",
+        "imageSub": "Zoom · 90 menit",
+        "stats": ["Live", "Q&A", "Rekaman", "Sertifikat"]
+      }
+    }
+  },
+  "integrations": {
+    "eyebrow": "Otomatis terintegrasi",
+    "title": "Hemat Biaya Integrasi dan Development",
+    "body": "Platform Mayar sudah otomatis terintegrasi dengan berbagai metode pembayaran yang ada di Indonesia, berbagai kurir dan logistik Indonesia, WhatsApp, Telegram, dan mudah untuk integrasi ke 5000+ aplikasi melalui Zapier dan Pipedream.",
+    "windowTitle": "Integrasi Mayar",
+    "hubBlurb": "Hub pembayaran · logistik · 5000+ app via Zapier & Pipedream",
+    "amountPrefix": "Sejumlah",
+    "clusters": {
+      "payments": {
+        "title": "Pembayaran",
+        "hint": "VA · e-wallet · kartu · retail",
+        "toastTitle": "Pembayaran Diterima",
+        "toastAmount": "Rp 700.000",
+        "toastAction": "Lihat Transaksi"
+      },
+      "logistics": {
+        "title": "Logistik",
+        "hint": "Kurir & resi otomatis",
+        "toastTitle": "Resi Berhasil Dibuat",
+        "toastAmount": "JNE · Regular",
+        "toastAction": "Lacak Pengiriman"
+      },
+      "apps": {
+        "title": "Aplikasi",
+        "hint": "Zapier · Pipedream · 5000+",
+        "toastTitle": "Invoice Berhasil Dibuat",
+        "toastAmount": "Rp 700.000",
+        "toastAction": "Download PDF Invoice"
+      }
+    }
+  },
+  "marketing": {
+    "eyebrow": "Fitur marketing built-in",
+    "title": "Tingkatkan Penjualan dengan Marketing",
+    "body": "Simpan data pelanggan Anda dan bangun hubungan dengan fitur pemasaran kami seperti blast email, kode promosi, bundling, upselling, cross-selling, dan integrasi ke ribuan aplikasi tanpa kode.",
+    "desktop": "Desktop",
+    "save": "Simpan",
+    "blocks": {
+      "columns": "Columns",
+      "heading": "Heading",
+      "text": "Text",
+      "image": "Image",
+      "button": "Button",
+      "divider": "Divider",
+      "menu": "Menu",
+      "timer": "Timer",
+      "video": "Video"
+    },
+    "campaigns": {
+      "labor-day": {
+        "title": "Promo Akhir Tahun",
+        "freeShip": "FREE SHIPPING ON ORDERS OVER $50",
+        "nav": ["Boys", "Girls", "Brand"],
+        "toastTitle": "Email Promosi dan kode Diskon",
+        "toastSub": "Spesial Tahun Baru Siap Dikirim",
+        "toastAction": "Blast Email Sekarang",
+        "imageAlt": "Kreatif email promo Labor Day"
+      },
+      "club": {
+        "title": "Promo Membership",
+        "freeShip": "MEMBER EXCLUSIVE · 30% OFF THIS MONTH",
+        "nav": ["Club", "Perks", "Join"],
+        "toastTitle": "Kode Promo MEMBER30 Aktif",
+        "toastSub": "Siap dikirim ke 2.480 pelanggan",
+        "toastAction": "Kirim Kampanye",
+        "imageAlt": "Promo membership club premium"
+      },
+      "webinar": {
+        "title": "Invite Webinar",
+        "freeShip": "FREE LIVE SESSION · LIMITED SEATS",
+        "nav": ["Agenda", "Speaker", "Join"],
+        "toastTitle": "Reminder Webinar Terkirim",
+        "toastSub": "1.120 undangan · open rate realtime",
+        "toastAction": "Lihat Laporan",
+        "imageAlt": "Kreatif undangan webinar live"
+      }
+    }
+  },
+  "checkoutStory": {
+    "sectionAria": "Cerita 1-Click Checkout",
+    "buyer": {
+      "eyebrow": "Checkout super cepat",
+      "titleBefore": "Konversi Meningkat dengan Teknologi",
+      "titleHighlight": "1-Click Checkout",
+      "body": "Teknologi 1-Click Checkout Mayar memudahkan pelanggan anda untuk membeli produk/jasa anda. Tidak perlu lagi ribet isi data setiap kali membeli produk, karena sistem Mayar akan otomatis mengisikan data-data untuk pelanggan anda."
+    },
+    "merchant": {
+      "titleBefore": "Dimanapun anda berada, tingkatkan konversi pelanggan baru dan lama",
+      "titleHighlight": "dengan cara baru.",
+      "bodyBefore": "Dengan solusi",
+      "oneClick": "1-click checkout",
+      "bodyMid": "kami dan",
+      "buyerNetwork": "buyer network",
+      "bodyAfter": ", bisnis Anda menerima pembayaran dengan konversi lebih tinggi.",
+      "features": [
+        "Buy Button",
+        "1-Click Checkout",
+        "Custom Checkout Domain",
+        "Embeddable Checkout"
+      ]
+    },
+    "toast": {
+      "title": "Data diri dan alamat berhasil terisi otomatis",
+      "cta": "Bayar Sekarang Juga"
+    }
+  },
+  "testimonials": {
+    "sectionAria": "Testimoni pelanggan Mayar",
+    "label": "Testimonials?",
+    "title": "Apa Kata Mereka…",
+    "blurb": "Pengguna kami menyukai kami dan kami selalu berusaha untuk memberikan yang terbaik, menambahkan lebih banyak fitur dan berkolaborasi dengan pelanggan untuk pengembangan selanjutnya",
+    "carouselAria": "Testimoni organisasi — scroll otomatis",
+    "prev": "Testimoni sebelumnya",
+    "next": "Testimoni berikutnya",
+    "selectAria": "Pilih testimoni",
+    "showQuote": "Tampilkan testimoni {org}",
+    "activeQuote": "Testimoni {org}",
+    "videos": {
+      "kang-aviv": "Bagaimana Mayar membantu proses check-out kelas-kelas di Kang Aviv Institute",
+      "anang": "Menjadi solusi side income content creator bersama Anang Marjono",
+      "dinar": "Platform ramah non-teknis untuk menjual produk digital bersama Dinar The HR",
+      "rinaldi": "Kelola tiket & peserta event tanpa ribet — Rinaldi Rizki, KHP Event"
+    },
+    "quotes": {
+      "greenpeace": "Fungsi pembayaran yang Mayar sediakan membantu kami dalam mengakselerasi kemudahan transaksi donasi online bagi calon donor Greenpeace Indonesia. Ini sangat penting bagi organisasi kami yang selalu mengedepankan kualitas pelayanan donor. Fitur seperti crowdfunding dan donasi berguna bagi organisasi kami. Yang paling penting mudah di set-up dan bisa diintegrasikan dengan platform in-house. Layanan kostumer sejauh ini responsif dan solutif.",
+      "digitalskola": "Pelayanan ini sangat membantu proses pembayaran, hanya saja perlu di develop lagi fitur-fitur di dalam dashboardnya.",
+      "bossexcel": "mayar.id merupakan super-app yang sangat keren bagi para content creator dan educator yang ingin memudahkan proses pengajaran. Dari pembayaran instan, pembuatan landing page, hingga berbagai fitur kelas seperti bundling, cross-selling, dan pembayaran yang fleksibel, semuanya ada disini! Jangan ragu untuk mencoba platform ini untuk pengalaman yang lebih baik dalam mengajar dan berkreasi.",
+      "pacmann": "Mayar sangat membantu dalam proses check-out kelas-kelas Pacmann, apalagi dengan berbagai alternatif pembayarannya. Selain itu, set-up link pembayaran juga no-code dan straight forward, sehingga mempermudah pekerjaan kami. Selain itu, fitur-fitur automated email, discount/promo code, dan lainnya juga mengurangi kebutuhan kami untuk membuat sistem serupa. CS-nya juga fast response dan terbuka dengan request kami yang cukup demanding. Terima kasih Mayar!",
+      "srz": "Penggunaan platform Mayar sangat bermanfaat karena dapat membuat proses penjualan menjadi lebih efisien. Adapun platform Mayar dapat membuat proses penjualan (pendaftaran webinar) oleh pelanggan menjadi lebih cepat dan mudah. Lalu, platform Mayar juga memiliki peran dalam mendukung Customer Relationship Management (CRM) perusahaan.",
+      "parenting-berdua": "Alhamdulillah udah beberapa bulan ini berpartner dengan Mayar, sangat-sangat terbantu. Dan fiturnya lengkap sesuai kebutuhan kami sebagai penyedia kelas online dan ebook.",
+      "hope": "Mungkin satu-satunya platform yang kami tahu yang sangat pesat perkembangan atau update fiturnya. Sangat lengkap sekali sehingga mempermudah kami dalam membuat penggalangan dana. Terima kasih untuk Mayar yang selalu fast respond dalam menanggapi pertanyaan atau kesulitan yang kami hadapi. Dan Mayar mendengar apa kata pelanggan, dibuktikan dengan penambahan fitur-fitur permintaan dari pelanggan.",
+      "tibra": "Saya pakai Mayar sudah hampir 1 tahun. Dulu mulai dengan paket yang free dan sekarang sudah ambil paket bisnis karena memang benefitnya banyak banget. Dulu masih manual dalam mengurus pembayaran berbagai event, sekarang udah lebih automatis. Fitur paling sering kami pakai adalah event, discount/promo code, dan link pembayaran. Selain itu, tim nya sangat open mind untuk menerima masukan dan feedback, jadi platform nya berkembang terus.",
+      "yayasan-guru-belajar": "Yang paling saya suka dari fitur Mayar adalah API nya, mudah sekali digunakan dan lebih simple dibandingkan dengan solusi lain sejenis. Hal ini mempermudah dan mempercepat proses integrasi ke sistem yang ada di Yayasan Guru Belajar.",
+      "anang-quote": "Sebagai kreator, kami cukup peduli dengan potongan harga — dan Mayar sangat kompetitif. Semakin kecil potongan, semakin besar kendali di tangan kreator.",
+      "dinar-quote": "Buat teman-teman yang punya bisnis tapi dasarnya bukan orang bisnis — Mayar bisa banget jadi partner untuk menjalankan operasional, karena gampang digunakan dan customer service-nya oke banget.",
+      "maksimalindiri": "Satu platform buat e-book, webinar, sampai kelas — Mayar bikin side income content creator jauh lebih rapi dan gampang dikelola."
+    },
+    "persons": {
+      "bossexcel": "Konten Kreator",
+      "parenting-berdua": "Konten Kreator",
+      "maksimalindiri": "Kreator & mentor"
+    }
+  },
+  "caseStudies": {
+    "sectionAria": "Studi kasus Mayar",
+    "title": "Studi Kasus",
+    "subtitle": "Bagaimana Mayar membantu bisnis berkembang dengan pesat dengan teknologi",
+    "watch": "Tonton film studi kasus Mayar × {partner}",
+    "prev": "Studi kasus sebelumnya",
+    "next": "Studi kasus berikutnya"
+  },
+  "press": {
+    "title": "Telah diliput oleh:",
+    "sectionAria": "Telah diliput oleh media"
+  },
+  "finalCta": {
+    "sectionAria": "Daftar sekarang",
+    "titleLine1": "Tunggu Apa Lagi?",
+    "titleLine2": "Daftar Sekarang.",
+    "body": "Mulai digitalisasi dan otomatisasi bisnis anda sehingga anda dapat fokus ke hal yang lebih penting",
+    "cta": "Daftar Sekarang",
+    "dashAlt": "Preview dashboard Beranda Mayar — saldo, QRIS, dan aktivitas bisnis"
+  },
+  "footer": {
+    "aria": "Footer Mayar",
+    "languageSr": "Bahasa",
+    "languageAria": "Pilih bahasa",
+    "certificates": "Certificates & Compliance:",
+    "navAria": "Tautan footer",
+    "columns": {
+      "industri": {
+        "title": "Industri",
+        "links": [
+          "Learning & Upskilling",
+          "Creator Economy",
+          "Online Retail 2.0",
+          "Event Organizer",
+          "Fundraiser",
+          "Software & SaaS",
+          "Writing & Comic"
+        ]
+      },
+      "teknologi": {
+        "title": "Teknologi",
+        "links": [
+          "AI Landing Page Builder",
+          "API Docs",
+          "MCP Server",
+          "Video DRM Protection",
+          "Headless Commerce",
+          "Integrasi Zapier",
+          "Mayar CLI",
+          "Openclaw Skill",
+          "SKILL.md"
+        ]
+      },
+      "bantuan": {
+        "title": "Bantuan",
+        "links": [
+          "Harga",
+          "Studi Kasus",
+          "Tutorial",
+          "Youtube",
+          "F.A.Q",
+          "Documentation",
+          "API Reference",
+          "API LLM.txt",
+          "Status",
+          "Changelog",
+          "Free EBooks",
+          "Free Resources",
+          "Free Tools",
+          "Kelas Online Gratis",
+          "Creator Academy",
+          "Demo",
+          "Portal Pelanggan",
+          "Developers",
+          "AI Agents"
+        ]
+      },
+      "perusahaan": {
+        "title": "Perusahaan",
+        "links": [
+          "Tentang",
+          "Blog",
+          "Karir",
+          "Open Source",
+          "Open LLM Model",
+          "Press-Kit",
+          "Trust Center"
+        ]
+      },
+      "legal": {
+        "title": "Legal",
+        "links": ["Kebijakan Privasi", "Kebijakan Layanan"]
+      }
+    },
+    "legal": {
+      "copyright": "© 2022 PT Mayar Kernel Supernova. All Rights reserved",
+      "disclaimer": "Mayar is a commerce platform, not a bank or payment gateway. Payment service provided by connecting merchants to multiple licensed payment service provider partnered with Mayar",
+      "pse": "Terdaftar di PSE Kominfo dengan Nomor 126400031034800000001",
+      "companionLabel": "Mayar Companion App Availabe at:"
+    },
+    "languages": {
+      "id": "Indonesian",
+      "en": "English"
+    }
+  },
+  "whatsapp": {
+    "aria": "Chat WhatsApp Mayar"
+  },
+  "common": {
+    "aria": {
+      "mayar": "Mayar"
+    }
+  }
+}

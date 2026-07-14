@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Mirrored upstream assets / local tooling (not app source)
+    "reference/**",
+    "mcps/**",
+    ".playwright-mcp/**",
   ]),
 ]);
 

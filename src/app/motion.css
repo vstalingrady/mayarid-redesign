@@ -77,13 +77,14 @@
   }
 }
 
-/* Elements start invisible until IntersectionObserver adds .in-view */
-.motion-pending .m-enter,
-.motion-ready .m-enter:not(.in-view) {
+/* Elements start invisible until IntersectionObserver adds .in-view.
+   Never gate the fixed nav — it must stay readable at all times. */
+.motion-pending .m-enter:not(.m-header),
+.motion-ready .m-enter:not(.in-view):not(.m-header) {
   opacity: 0 !important;
 }
 
-/* Header — drops in from above */
+/* Optional header drop-in if something still uses .m-header + .in-view */
 .motion-ready .m-header.in-view {
   animation: mayar-drop-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -185,26 +186,490 @@
   will-change: transform;
 }
 
+/* Product split explorer — visible motion (progress, caption, ken burns, row) */
+@keyframes product-explorer-caption {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes product-explorer-progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Real zoom — starts at 1.0 so motion is obvious */
+@keyframes product-explorer-kenburns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes product-explorer-row-pulse {
+  0% {
+    box-shadow: inset 3px 0 0 0 rgb(37 99 235 / 0.9);
+  }
+  50% {
+    box-shadow:
+      inset 3px 0 0 0 rgb(37 99 235 / 0.9),
+      0 0 0 3px rgb(37 99 235 / 0.12);
+  }
+  100% {
+    box-shadow: inset 3px 0 0 0 rgb(37 99 235 / 0.9);
+  }
+}
+
+.product-explorer-caption {
+  animation: product-explorer-caption 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.product-explorer-progress {
+  width: 0%;
+  animation-name: product-explorer-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.product-explorer-kenburns {
+  animation: product-explorer-kenburns 2.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.product-explorer-row-active {
+  animation: product-explorer-row-pulse 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  box-shadow: inset 3px 0 0 0 rgb(37 99 235 / 0.9);
+}
+
+/* ── Features integration graph ── */
+@keyframes fg-edge-flow {
+  to {
+    stroke-dashoffset: -108;
+  }
+}
+
+@keyframes fg-node-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.45);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes fg-node-active-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 color-mix(in srgb, var(--node-color, #2563eb) 35%, transparent),
+      0 8px 22px -8px var(--node-color, #2563eb);
+  }
+  50% {
+    box-shadow:
+      0 0 0 8px color-mix(in srgb, var(--node-color, #2563eb) 12%, transparent),
+      0 10px 28px -6px var(--node-color, #2563eb);
+  }
+}
+
+@keyframes fg-ring-pulse {
+  0% {
+    r: 18;
+    opacity: 0.85;
+  }
+  100% {
+    r: 42;
+    opacity: 0;
+  }
+}
+
+@keyframes fg-progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes fg-caption {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fg-hub-pop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.features-graph.fg-live .fg-edge-flow {
+  animation: fg-edge-flow 1.05s linear infinite;
+}
+
+.features-graph .fg-node {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.45);
+}
+
+.features-graph.fg-live .fg-node-in {
+  animation: fg-node-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Dim after entrance — filter so it doesn't kill keyframe opacity */
+.features-graph.fg-live .fg-node-in.fg-node-dim {
+  filter: grayscale(0.35) opacity(0.35);
+  transition: filter 0.35s ease;
+}
+
+.features-graph.fg-live .fg-node-active {
+  animation: fg-node-active-glow 1.4s ease-in-out infinite;
+}
+
+.features-graph.fg-live .fg-node-ring-pulse {
+  animation: fg-ring-pulse 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.features-graph.fg-live .fg-progress {
+  width: 0%;
+  animation: fg-progress linear forwards;
+}
+
+.features-graph.fg-live .fg-caption {
+  animation: fg-caption 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.features-graph .fg-hub-pop {
+  transform: translate(-50%, -50%);
+}
+
+.features-graph.fg-live .fg-hub-pop {
+  animation: fg-hub-pop 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── Specimen stages (Go Online / Integrations / Marketing) ──
+   Classes live here (not globals.css) so Tailwind PostCSS cannot swallow them.
+   Keyframe names intentionally differ from class names (Edge can choke when
+   animation-name === class token on the same element).
+   Container entrance is opacity-only so fill-mode never freezes a parent
+   transform that would stall child float/shine layers (Edge compositor). */
+
+@keyframes mayar-stage-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes mayar-stage-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* translate3d keeps a compositor layer — more reliable in Edge than translateY */
+@keyframes mayar-stage-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+@keyframes mayar-stage-kenburns {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(0, 0, 0) scale(1.08);
+  }
+}
+
+@keyframes mayar-stage-shine {
+  0% {
+    transform: translate3d(-130%, 0, 0) skewX(-12deg);
+  }
+  100% {
+    transform: translate3d(280%, 0, 0) skewX(-12deg);
+  }
+}
+
+@keyframes mayar-stage-toast-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes mayar-stage-check-pop {
+  0% {
+    transform: scale(0.4);
+  }
+  60% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes mayar-stage-flow {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes mayar-stage-hub-glow {
+  0%,
+  100% {
+    box-shadow: 0 4px 12px -8px rgb(11 18 32 / 0.12);
+  }
+  50% {
+    box-shadow:
+      0 0 0 4px rgb(37 99 235 / 0.14),
+      0 8px 18px -10px rgb(37 99 235 / 0.32);
+  }
+}
+
+/*
+  Section shell entrance — opacity only (no transform).
+  Parent transform + fill-mode:both can stall child infinite animations in Edge.
+*/
+.stage-enter {
+  animation-name: mayar-stage-fade;
+  animation-duration: 0.7s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}
+
+.stage-enter-delay {
+  animation-name: mayar-stage-fade;
+  animation-duration: 0.75s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-delay: 0.08s;
+  animation-fill-mode: both;
+}
+
+/* Hidden before first reveal */
+.stage-pending {
+  opacity: 0;
+}
+
+/* Content swap — remount with key; transform OK (element is replaced, not a float parent) */
+.stage-swap {
+  animation-name: mayar-stage-rise;
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}
+
+.stage-swap-fast {
+  animation-name: mayar-stage-rise;
+  animation-duration: 0.35s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}
+
+.stage-fade-in {
+  animation-name: mayar-stage-fade;
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}
+
+/* Continuous ambient — own layer, no parent transform hold */
+.stage-float {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  animation-name: mayar-stage-float;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+}
+
+.stage-float-soft {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  animation-name: mayar-stage-float;
+  animation-duration: 3.2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+}
+
+.stage-kenburns {
+  transform-origin: center center;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  animation-name: mayar-stage-kenburns;
+  animation-duration: 7s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-play-state: running;
+}
+
+.stage-shine {
+  animation-name: mayar-stage-shine;
+  animation-duration: 2.6s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+}
+
+.stage-toast-in {
+  animation-name: mayar-stage-toast-in;
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}
+
+.stage-check-pop {
+  animation-name: mayar-stage-check-pop;
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}
+
+.stage-flow {
+  animation-name: mayar-stage-flow;
+  animation-duration: 1.6s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+}
+
+.stage-hub-glow {
+  animation-name: mayar-stage-hub-glow;
+  animation-duration: 2.4s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+}
+
+.stage-hub-glow-delay {
+  animation-name: mayar-stage-hub-glow;
+  animation-duration: 2.4s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0.4s;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+}
+
+/* Image dual-buffer crossfade */
+.stage-crossfade {
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Compact testimonial strip — soft enter on each swap */
+@keyframes testimonial-quote-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.testimonial-quote {
+  animation: testimonial-quote-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Infinite horizontal marquee for org quote cards.
+   Track is tripled in JS → -33.333% loops seamlessly. */
+@keyframes testimonial-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-33.333%, 0, 0);
+  }
+}
+
+.testimonial-marquee {
+  animation: testimonial-marquee 42s linear infinite;
+  will-change: transform;
+}
+
+/* Keep ambient marquee under soft reduced-motion policy
+   (Windows "Show animations" used to freeze this strip). */
 @media (prefers-reduced-motion: reduce) {
+  .testimonial-marquee {
+    animation-duration: 72s;
+  }
+}
+
+/*
+  Reduced-motion policy (marketing specimen):
+  Windows often sets prefers-reduced-motion via "Show animations in Windows".
+  That was killing every continuous loop + entrance so the page looked fully
+  static while autoplay still cycled content.
+
+  Soft policy: keep short entrances + ambient specimen motion (same idea as
+  FloatingIsland's always-on JS bob). Only drop high-frequency infinite
+  flair that can feel nauseating (edge flow dash, node pulse rings).
+*/
+@media (prefers-reduced-motion: reduce) {
+  /* Safety: never leave content invisible if JS/IO never fires */
   .motion-pending .m-enter,
-  .motion-ready .m-enter:not(.in-view) {
+  .stage-pending {
     opacity: 1 !important;
   }
-  .motion-ready .m-header,
-  .motion-ready .m-copy-1,
-  .motion-ready .m-copy-2,
-  .motion-ready .m-copy-3,
-  .motion-ready .m-copy-4,
-  .motion-ready .m-copy-5,
-  .motion-ready .m-stage,
-  .motion-ready .m-product,
-  .motion-ready .m-note,
-  .motion-ready .m-trust,
-  .motion-ready .m-line,
-  .motion-ready .m-dot {
+
+  /* Tone down noisy graph loops only — keep node entrance + active glow */
+  .features-graph.fg-live .fg-edge-flow,
+  .features-graph.fg-live .fg-node-ring-pulse {
     animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-    stroke-dashoffset: 0 !important;
   }
 }

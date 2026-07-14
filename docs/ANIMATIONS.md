@@ -93,6 +93,21 @@ Island stays static; still show full composition.
 
 ---
 
+## Product types bento (Direction B)
+
+Section: `ProductTypesSection` (`#produk-tipe`), between TrustStrip and ProductDashboard.
+
+| Motion | Spec |
+|--------|------|
+| Enter | IntersectionObserver + `FadeIn`: header 0ms, hero 80ms scale, family cards `120 + i*70`ms |
+| Hover chips | `.dash-card` lift (−4px) + icon scale |
+| Hover hero | Lift + deeper blue shadow; background photo `scale(1.05)` over 700ms |
+| Reduced motion | Zero transforms on enter/hover (see `globals.css` product-types rules) |
+
+Images: `/public/specimen/products/{payment,physical,digital,live,content,saas,fundraise}.jpg`
+
+---
+
 ## Implementation stack (when ready)
 
 - CSS only for float + entrance (no lib required)  
