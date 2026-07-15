@@ -84,9 +84,11 @@ function useInView(threshold = 0.12) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    // Toggle on both enter + leave so the fade-up replays every time
+    // the strip scrolls into view (same pattern as TrustStrip / MotionReady).
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry?.isIntersecting) setInView(true);
+        if (entry) setInView(entry.isIntersecting);
       },
       { threshold, rootMargin: "0px 0px -30px 0px" },
     );
