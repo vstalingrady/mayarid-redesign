@@ -254,6 +254,14 @@
 }
 
 /* ── Features integration graph ── */
+/* Lock stage to a square so % node positions form a true circle, not an oval. */
+.features-graph-stage {
+  aspect-ratio: 1 / 1;
+  height: auto;
+  /* Width set via Tailwind; never let flex/parent stretch the box. */
+  flex-shrink: 0;
+}
+
 @keyframes fg-edge-flow {
   to {
     stroke-dashoffset: -108;

@@ -156,11 +156,12 @@ export function FeaturesGraph({ inView }: Props) {
       }`}
     >
       {/*
-        Size from viewport height (not % of auto parent — that collapses).
-        Parent also sets a width; this keeps the square filling it.
+        Always a perfect square so orbits stay circular (never oval).
+        Drive size from width only + aspect-ratio:1 — setting both h and w
+        independently was stretching the stage tall on mobile.
+        12rem ≈ nav + section pad + footer/legend headroom.
       */}
-      {/* 12rem = fixed nav (~4.75) + section pad + footer/legend */}
-      <div className="features-graph-stage relative mx-auto aspect-square h-[min(calc(100dvh-12rem),840px)] w-[min(100%,calc(100dvh-12rem),840px)] max-h-full max-w-full">
+      <div className="features-graph-stage relative mx-auto aspect-square h-auto w-[min(100%,840px,calc(100dvh-12rem))] max-w-full shrink-0">
         <svg
           viewBox={`0 0 ${VB} ${VB}`}
           className="absolute inset-0 h-full w-full overflow-visible"
