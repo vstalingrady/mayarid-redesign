@@ -32,8 +32,46 @@ export function SiteFooter() {
       className="relative w-full bg-blue text-white"
     >
       <div className="mx-auto max-w-[1180px] px-5 pb-10 pt-12 sm:px-8 sm:pb-12 sm:pt-14 lg:px-10 lg:pt-16">
+        {/* Portfolio / non-affiliation notice */}
+        <div className="mb-10 rounded-xl border border-white/25 bg-white/10 px-4 py-3.5 sm:mb-12 sm:px-5 sm:py-4">
+          <p className="text-[12px] font-bold uppercase tracking-[0.06em] text-white sm:text-[13px]">
+            {t("portfolio.badge")}
+          </p>
+          <p className="mt-1.5 text-[13px] leading-relaxed text-white/90 sm:text-[14px]">
+            {t("portfolio.footer")}
+          </p>
+          <p className="mt-2 text-[12px] leading-relaxed text-white/70 sm:text-[13px]">
+            {t("portfolio.links")}{" "}
+            <a
+              href="https://mayar.id"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-white underline decoration-white/40 underline-offset-2 hover:decoration-white"
+            >
+              mayar.id
+            </a>
+            {" · "}
+            <a
+              href="https://github.com/vstalingrady/mayarid-redesign"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-white underline decoration-white/40 underline-offset-2 hover:decoration-white"
+            >
+              GitHub
+            </a>
+            {" · "}
+            <a
+              href="https://mayar.vstal.in"
+              className="font-semibold text-white underline decoration-white/40 underline-offset-2 hover:decoration-white"
+            >
+              mayar.vstal.in
+            </a>
+          </p>
+        </div>
+
         {/* Top: brand + link columns */}
         <div className="grid gap-10 lg:grid-cols-[minmax(0,220px)_minmax(0,1fr)] lg:gap-12 xl:gap-16">
+
           {/* Brand column */}
           <div className="flex flex-col gap-5">
             <a

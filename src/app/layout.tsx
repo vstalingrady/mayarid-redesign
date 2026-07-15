@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mayar — Frictionless Online Checkout",
+  title: "Mayar Homepage Recreation (Portfolio) — Unofficial",
   description:
-    "No-code payment & commerce. Checkout, QRIS, dashboard, and payouts for any business.",
+    "Unofficial portfolio recreation of mayar.id. Not affiliated with Mayar / PT Mayar Kernel Supernova. For demonstration only.",
   icons: {
     icon: [
       { url: "/favicon.png?v=3", type: "image/png", sizes: "48x48" },
@@ -27,9 +27,9 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png?v=3", sizes: "180x180" }],
   },
   openGraph: {
-    title: "Mayar — Frictionless Online Checkout",
+    title: "Mayar Homepage Recreation (Portfolio) — Unofficial",
     description:
-      "No-code payment & commerce for creators, educators, and any business.",
+      "Unofficial portfolio recreation of mayar.id. Not affiliated with Mayar. Demo only.",
     type: "website",
   },
 };

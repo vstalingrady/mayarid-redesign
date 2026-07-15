@@ -537,9 +537,17 @@
   "whatsapp": {
     "aria": "Chat with Mayar on WhatsApp"
   },
+  "portfolio": {
+    "aria": "Portfolio disclaimer",
+    "badge": "Portfolio work",
+    "banner": "Unofficial recreation of mayar.id — not affiliated with Mayar. Built by Vstalin Grady as a design/engineering demo only.",
+    "footer": "This site is an unofficial visual recreation of mayar.id for portfolio purposes only. It is not affiliated with, endorsed by, or connected to Mayar / PT Mayar Kernel Supernova. No real accounts, payments, or services are offered here.",
+    "links": "Official product:"
+  },
   "common": {
     "aria": {
       "mayar": "Mayar"
     }
   }
 }
+

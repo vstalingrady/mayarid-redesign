@@ -9,6 +9,7 @@ import { MotionReady } from "@/components/MotionReady";
 import { PressStrip } from "@/components/PressStrip";
 import { ProductDashboard } from "@/components/ProductDashboard";
 import { ProductTypesSection } from "@/components/ProductTypesSection";
+import { PortfolioDisclaimer } from "@/components/PortfolioDisclaimer";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SpecimenHero } from "@/components/SpecimenHero";
@@ -20,7 +21,9 @@ export default function Home() {
   return (
     <MotionReady>
       <SiteHeader />
+      <PortfolioDisclaimer />
       <main>
+
         <SpecimenHero />
         <TrustStrip />
         <ProductDashboard />

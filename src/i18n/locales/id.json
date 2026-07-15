@@ -537,9 +537,17 @@
   "whatsapp": {
     "aria": "Chat WhatsApp Mayar"
   },
+  "portfolio": {
+    "aria": "Pernyataan portfolio",
+    "badge": "Karya portfolio",
+    "banner": "Rekreasi tidak resmi dari mayar.id — tidak berafiliasi dengan Mayar. Dibuat oleh Vstalin Grady sebagai demo desain/engineering saja.",
+    "footer": "Situs ini adalah rekreasi visual tidak resmi dari mayar.id untuk keperluan portfolio. Tidak berafiliasi, didukung, atau terhubung dengan Mayar / PT Mayar Kernel Supernova. Tidak ada akun, pembayaran, atau layanan nyata di sini.",
+    "links": "Produk resmi:"
+  },
   "common": {
     "aria": {
       "mayar": "Mayar"
     }
   }
 }
+
